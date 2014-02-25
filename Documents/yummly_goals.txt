@@ -1,0 +1,24 @@
+user prefrences:
+
+	BMI
+		-weight
+		-height
+
+		OR
+
+		-goal weight
+
+	Diabetic
+		-exclusionary
+
+	Alergies
+		-exclusionary
+
+I have eaten X calories today what is my 2nd meal of 4
+
+quick meal - how hungry are you?
+
+linear rate ( maybe tapers off the end )
+
+a choice between bmi calcuator and goal weight
+
