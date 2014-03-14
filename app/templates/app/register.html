@@ -1,32 +1,40 @@
 <!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
 <html>
 <head>
     <title>Pyum</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
+
 </head>
-
 <body>
-<h1>Register with Pyum</h1>
 
-{% if registered %}
-    Pyum says: <strong>thank you for registering!</strong>
-    <a href="/app">Return to the homepage.</a><br/>
-{% else %}
-    Pyum says: <strong>register here!</strong><br/>
 
-    <form id="user_form" method="post" action="/app/register/"
-          enctype="multipart/form-data">
+<div id="templatemo_main" style="background-color: #771201;">
+    <div class="content_wrapper" style="background-color: #FFFFFF; width: 50%; margin-left: auto; margin-right: auto">
+        <h1 style="margin-top: 10px">Register with Pyum</h1>
 
-        {% csrf_token %}
+        {% if registered %}
+            <strong>thank you for registering!</strong>
+            <a href="/app">Return to the homepage.</a><br/>
+        {% else %}
+            <form id="user_form" method="post" action="/app/register/"
+                  enctype="multipart/form-data">
 
-        <!-- Display each form. The as_p method wraps each element in a paragraph
-             (<p>) element. This ensures each element appears on a new line,
-             making everything look neater. -->
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
+                {% csrf_token %}
 
-        <!-- Provide a button to click to submit the form. -->
-        <input type="submit" name="submit" value="Register"/>
-    </form>
-{% endif %}
+                <!-- Display each form. The as_p method wraps each element in a paragraph
+                     (<p>) element. This ensures each element appears on a new line,
+                     making everything look neater. -->
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+
+                <!-- Provide a button to click to submit the form. -->
+                <input type="submit" name="submit" value="Register"/>
+            </form>
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+</div>
 </body>
 </html>
