@@ -1,0 +1,3 @@
+1) install psycopg2 - http://www.stickpeople.com/projects/python/win-psycopg/
+2) Install south - open terminal and type "pip install south"
+3) install pillow - http://www.lfd.uci.edu/~gohlke/pythonlibs/
