@@ -15,4 +15,4 @@ class UserForm(forms.ModelForm):
 class AppUserForm(forms.ModelForm):
     class Meta:
         model = AppUser
-        fields = ('is_vegetarian', 'is_diabetic', 'picture')
+        fields = ('picture',)
