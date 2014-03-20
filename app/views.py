@@ -4,14 +4,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from app.forms import UserForm, AppUserForm
-
-
-class YummlyApiInfo:
-    def __init__(self):
-        pass
-
-    Id = '1db8b5cc'
-    Key = 'd470fadf2ef7bdcaec50be759255006a'
+import YummlyDriver
 
 
 def register(request):
@@ -116,9 +109,8 @@ def user_login(request):
 
 
 def search_recipes(request):
-    context = RequestContext(request)
-
-    if request.method == 'POST':
-        url = "http://api.yummly.com/v1/api/recipes" \
-              + "?_app_id=" + str(YummlyApiInfo.Id) \
-              + "&_app_key=" + str(YummlyApiInfo.Key)
+    x = YummlyDriver.RecipeQueryParameters()
+    x.q = "hot and sour soup"
+    results = YummlyDriver.search_recipes(x)
+    y = results.matches[0].recipeName
+    return HttpResponse(y)

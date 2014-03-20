@@ -1,3 +1,9 @@
+How to migrate models in the database:
+1) manage.py schemamigration --auto
+2) manage.py migrate app
+
+
+How to fix your broken project on windows:
 1) install psycopg2 - http://www.stickpeople.com/projects/python/win-psycopg/
 2) Install south - open terminal and type "pip install south"
 3) install pillow - http://www.lfd.uci.edu/~gohlke/pythonlibs/

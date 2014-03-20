@@ -3,9 +3,8 @@ from django.contrib.auth.models import User
 
 
 class YummlyDiet(models.Model):
-    shortDescription = models.CharField(max_length=50)
-    longDescription = models.CharField(max_length=1000)
-    searchValue = models.CharField(max_length=250)
+    shortDescription = models.CharField(max_length=50, default="DEFAULT")
+    searchValue = models.CharField(max_length=250, default="DEFAULT")
 
     def __unicode__(self):
         return self.shortDescription
