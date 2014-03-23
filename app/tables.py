@@ -8,3 +8,4 @@ class UserTable(tables.Table):
     class Meta:
         model = AppUser
         # add class="paleblue" to <table> tag
+        attrs = {"class": "paleblue"}
