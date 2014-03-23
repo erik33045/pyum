@@ -5,8 +5,7 @@ from django.template import RequestContext
 from django.shortcuts import render
 from django_tables2 import RequestConfig
 
-from app.models import AppUser
-from app.tables import UserTable
+import app.tables
 from app.forms import UserForm, AppUserForm
 import YummlyDriver
 
@@ -112,15 +111,12 @@ def user_login(request):
         return render_to_response('app/login.html', {}, context)
 
 
-def search_recipes2(request):
+def search_recipes(request):
     x = YummlyDriver.RecipeQueryParameters()
     x.q = "hot and sour soup"
-    results = YummlyDriver.search_recipes(x)
-    y = results.matches[0].recipeName
-    return HttpResponse(y)
+    results = YummlyDriver.search_recipes(x).matches
+    table_data = app.tables.map_from_result_list(results)
 
-
-def search_recipes(request):
-    table = UserTable(AppUser.objects.all())
+    table = app.tables.ResultTable(table_data)
     RequestConfig(request).configure(table)
     return render(request, 'recipes.html', {'table': table})
