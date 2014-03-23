@@ -25,6 +25,7 @@ class RecipeQueryParameters:
     allowedAlergy = []
     maxTotalTimeInSeconds = 0
 
+
     #Flavor stuff
     sweetMinFlavor = 0.0
     sweetMaxFlavor = 0.0
