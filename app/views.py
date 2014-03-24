@@ -2,7 +2,10 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.shortcuts import render
+from django_tables2 import RequestConfig
 
+import app.tables
 from app.forms import UserForm, AppUserForm
 import YummlyDriver
 
@@ -111,6 +114,9 @@ def user_login(request):
 def search_recipes(request):
     x = YummlyDriver.RecipeQueryParameters()
     x.q = "hot and sour soup"
-    results = YummlyDriver.search_recipes(x)
-    y = results.matches[0].recipeName
-    return HttpResponse(y)
+    results = YummlyDriver.search_recipes(x).matches
+    table_data = app.tables.map_from_result_list(results)
+
+    table = app.tables.ResultTable(table_data)
+    RequestConfig(request).configure(table)
+    return render(request, 'recipes.html', {'table': table})

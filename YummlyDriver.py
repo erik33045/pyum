@@ -1,4 +1,3 @@
-__author__ = 'erik'
 from yummly import Client
 
 
@@ -16,7 +15,7 @@ class RecipeQueryParameters:
 
     q = ""
     start = 0
-    maxResult = 40
+    maxResult = 25
     requirePictures = False
     allowedIngredients = []
     excludedIngredients = []
@@ -25,7 +24,7 @@ class RecipeQueryParameters:
     allowedAlergy = []
     maxTotalTimeInSeconds = 0
 
-    #Flavor stuff
+    # Flavor stuff
     sweetMinFlavor = 0.0
     sweetMaxFlavor = 0.0
     meatyMinFlavor = 0.0
