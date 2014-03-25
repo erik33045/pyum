@@ -13,6 +13,8 @@ class RecipeQueryParameters:
     def __init__(self):
         pass
 
+    # include measurements & user info
+
     q = ""
     start = 0
     maxResult = 25
@@ -110,6 +112,11 @@ class RecipeQueryParameters:
 
 
 def search_recipes(recipe_query_parameters):
+    # passed in partial recipe parameters object
+
+    #call calculator to figure out desired meals
+
+    #have yummly driver query data
     client = Client(api_id=YummlyApiInfo.Id, api_key=YummlyApiInfo.Key)
     return_dictionary = recipe_query_parameters.to_dictionary()
     return client.search(**return_dictionary)
