@@ -187,8 +187,6 @@ class RecipeQueryParameters:
         if self.maxVitaminA > 0.0:
             return_dictionary['nutrition.vitamina.max'] = self.maxVitaminA
 
-
-        # Test submit
         return return_dictionary
 
 
