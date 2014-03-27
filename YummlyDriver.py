@@ -107,7 +107,7 @@ class RecipeQueryParameters:
             return_dictionary['flavor.piquant.min'] = self.piquantMinFlavor
         if self.piquantMaxFlavor > 0.0:
             return_dictionary['flavor.piquant.max'] = self.piquantMaxFlavor
-
+        # Test submit
         return return_dictionary
 
 
