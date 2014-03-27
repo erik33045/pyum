@@ -202,7 +202,8 @@ def search_recipes(recipe_query_parameters):
         recipe_query_parameters.maxCarbs = 65
         recipe_query_parameters.minCarbs = 45
         recipe_query_parameters.maxSodium = 400
-        #have yummly driver query data
+
+    #have yummly driver query data
     client = Client(api_id=YummlyApiInfo.Id, api_key=YummlyApiInfo.Key)
     return_dictionary = recipe_query_parameters.to_dictionary()
     return client.search(**return_dictionary)
