@@ -1,5 +1,6 @@
 def get_bmi(height, weight):
-    bmi = ((weight * 703) / (height ** 2))
+    bmi = ((weight * 703.0) / (height ** 2.0))
+    bmi = round(bmi, 1)
     return bmi
 
 
@@ -11,7 +12,7 @@ def get_bmr(height, weight, gender, age):
     return bmr
 
 
-def get_calories(bmi, bmr, activity_level):
+def get_calories(bmr, activity_level, goal, ppw):
     calories = 0
     if activity_level == "sedentary":
         calories = bmr * 1.2
@@ -24,13 +25,13 @@ def get_calories(bmi, bmr, activity_level):
     elif activity_level == "extra active":
         calories = bmr * 1.9
 
-    #if underweight, eat at 500 calorie surplus (1 pound per week)
-    if bmi < 18.5:
-        calories += 500
+    #if user wishes to lose weight, eat at ppw * 500 deficit
+    if goal == "lose":
+        calories -= 500.0 * ppw
 
-    #if overweight, eat at 500 calorie deficit
-    elif bmi >= 25:
-        calories -= 500
+    #if user wishes to gain wait, eat at ppw * 500 surplus
+    elif goal == "gain":
+        calories += 500.0 * ppw
 
     #if BMI in normal range, maintain weight
 
@@ -39,10 +40,11 @@ def get_calories(bmi, bmr, activity_level):
 
 #testing functions
 BMI = get_bmi(71, 180)
-print(BMI)
+print("BMI: " + str(BMI))
 BMR = get_bmr(71, 180, "male", 22)
-cals = get_calories(BMI, BMR, "lightly active")
-print(cals)
+print("BMR: " + str(BMR))
+cals = get_calories(BMR, "sedentary", "lose", 1)
+print("Calories per day: " + str(cals))
 
 
 
