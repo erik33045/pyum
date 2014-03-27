@@ -78,22 +78,6 @@ class RecipeQueryParameters:
 
     def to_dictionary(self):
         return_dictionary = {"q": self.q}
-        if self.age > 0.0:
-            return_dictionary['age'] = self.age
-        if self.weight > 0.0:
-            return_dictionary['weight'] = self.weight
-        if self.height > 0.0:
-            return_dictionary['height'] = self.height
-        if len(self.gender) > 0:
-            return_dictionary['gender'] = self.gender
-        if len(self.goal) > 0:
-            return_dictionary['goal'] = self.gender
-        if len(self.activityLevel) > 0:
-            return_dictionary['activityLevel'] = self.activityLevel
-        if self.diabetic:
-            return_dictionary['diabetic'] = True
-        if self.mealsLeft > 0:
-            return_dictionary['mealsLeft'] = self.mealsLeft
         if self.start > 0:
             return_dictionary['start'] = self.start
         if self.caloriesConsumed > 0:
@@ -196,8 +180,12 @@ def search_recipes(recipe_query_parameters):
     #call calculator to figure out desired meals
     calc = CalorieCalc(recipe_query_parameters)
 
-    recipe_query_parameters.maxCalories = calc.get_calories() / recipe_query_parameters.mealsLeft
+    #calculate max calories for meal
+    recipe_query_parameters.maxCalories = calc.get_calories() - recipe_query_parameters.caloriesConsumed
+    if recipe_query_parameters.mealsLeft > 0:
+        recipe_query_parameters.maxCalories /= recipe_query_parameters.mealsLeft
 
+    #diabetic info
     if recipe_query_parameters.diabetic == True:
         recipe_query_parameters.maxCarbs = 65
         recipe_query_parameters.minCarbs = 45
