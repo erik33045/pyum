@@ -80,8 +80,6 @@ class RecipeQueryParameters:
         return_dictionary = {"q": self.q}
         if self.start > 0:
             return_dictionary['start'] = self.start
-        if self.caloriesConsumed > 0:
-            return_dictionary['caloriesConsumed'] = self.caloriesConsumed
         if self.maxResult != 40:
             return_dictionary['maxResult'] = self.maxResult
         if self.requirePictures:
