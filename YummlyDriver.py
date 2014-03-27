@@ -1,4 +1,5 @@
 from yummly import Client
+import CalorieCalc.py
 
 
 class YummlyApiInfo:
@@ -14,6 +15,13 @@ class RecipeQueryParameters:
         pass
 
     # include measurements & user info
+    age = 0
+    height = 0
+    weight = 0
+    gender = ""
+    goal = ""
+    activityLevel = ""
+    mealsLeft = 3
 
     q = ""
     start = 0
@@ -68,7 +76,20 @@ class RecipeQueryParameters:
 
     def to_dictionary(self):
         return_dictionary = {"q": self.q}
-
+        if self.age > 0.0:
+            return_dictionary['age'] = self.age
+        if self.weight > 0.0:
+            return_dictionary['weight'] = self.weight
+        if self.height > 0.0:
+            return_dictionary['height'] = self.height
+        if len(self.gender) > 0:
+            return_dictionary['gender'] = self.gender
+        if len(self.goal) > 0:
+            return_dictionary['goal'] = self.gender
+        if len(self.activityLevel) > 0:
+            return_dictionary['activityLevel'] = self.activityLevel
+        if self.mealsLeft > 0:
+            return_dictionary['mealsLeft'] = self.mealsLeft
         if self.start > 0:
             return_dictionary['start'] = self.start
         if self.maxResult != 40:
@@ -159,6 +180,9 @@ class RecipeQueryParameters:
             return_dictionary['nutrition.vitamina.min'] = self.minVitaminA
         if self.maxVitaminA > 0.0:
             return_dictionary['nutrition.vitamina.max'] = self.maxVitaminA
+
+
+        # Test submit
         return return_dictionary
 
 
@@ -166,6 +190,8 @@ def search_recipes(recipe_query_parameters):
     # passed in partial recipe parameters object
 
     #call calculator to figure out desired meals
+    calc = CalorieCalc(recipe_query_parameters)
+    recipe_query_parameters["maxCalories"] = calc.get_calories() / recipe_query_parameters["mealsLeft"]
 
     #have yummly driver query data
     client = Client(api_id=YummlyApiInfo.Id, api_key=YummlyApiInfo.Key)
