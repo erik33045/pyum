@@ -1,5 +1,5 @@
 from yummly import Client
-import CalorieCalc.py
+from CalorieCalc import CalorieCalc
 
 
 class YummlyApiInfo:
@@ -22,6 +22,8 @@ class RecipeQueryParameters:
     goal = ""
     activityLevel = ""
     mealsLeft = 3
+    diabetic = False
+    caloriesConsumed = 0
 
     q = ""
     start = 0
@@ -88,10 +90,14 @@ class RecipeQueryParameters:
             return_dictionary['goal'] = self.gender
         if len(self.activityLevel) > 0:
             return_dictionary['activityLevel'] = self.activityLevel
+        if self.diabetic:
+            return_dictionary['diabetic'] = True
         if self.mealsLeft > 0:
             return_dictionary['mealsLeft'] = self.mealsLeft
         if self.start > 0:
             return_dictionary['start'] = self.start
+        if self.caloriesConsumed > 0:
+            return_dictionary['caloriesConsumed'] = self.caloriesConsumed
         if self.maxResult != 40:
             return_dictionary['maxResult'] = self.maxResult
         if self.requirePictures:
@@ -191,9 +197,14 @@ def search_recipes(recipe_query_parameters):
 
     #call calculator to figure out desired meals
     calc = CalorieCalc(recipe_query_parameters)
-    recipe_query_parameters["maxCalories"] = calc.get_calories() / recipe_query_parameters["mealsLeft"]
 
-    #have yummly driver query data
+    recipe_query_parameters.maxCalories = calc.get_calories() / recipe_query_parameters.mealsLeft
+
+    if recipe_query_parameters.diabetic == True:
+        recipe_query_parameters.maxCarbs = 65
+        recipe_query_parameters.minCarbs = 45
+        recipe_query_parameters.maxSodium = 400
+        #have yummly driver query data
     client = Client(api_id=YummlyApiInfo.Id, api_key=YummlyApiInfo.Key)
     return_dictionary = recipe_query_parameters.to_dictionary()
     return client.search(**return_dictionary)

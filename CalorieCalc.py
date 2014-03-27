@@ -7,12 +7,12 @@ class CalorieCalc:
     activityLevel = ""
 
     def __init__(self, info):
-        self.age = info['age']
-        self.weight = info['weight']
-        self.height = info['height']
-        self.gender = info['gender']
-        self.goal = info['goal']
-        self.activityLevel = info['activityLevel']
+        self.age = info.age
+        self.weight = info.weight
+        self.height = info.height
+        self.gender = info.gender
+        self.goal = info.goal
+        self.activityLevel = info.activityLevel
 
     def get_bmi(self):
         bmi = ((self.weight * 703.0) / (self.height ** 2.0))
@@ -23,7 +23,7 @@ class CalorieCalc:
     def get_bmr(self):
         if self.gender == "Female":
             bmr = 655 + (4.35 * self.weight) + (4.7 * self.height) - (4.7 * self.age)
-        if self.gender == "Male":
+        elif self.gender == "Male":
             bmr = 66 + (6.23 * self.weight) + (12.7 * self.height) - (6.8 * self.age)
         return bmr
 
@@ -72,9 +72,17 @@ class CalorieCalc:
         return calories
 
 #testing functions
-test_dictionary = {"height": 71, "weight": 180, "age": 22, "gender": "Male", "goal": "Lose 1",
-                   "activityLevel": "lightly active"}
-calc = CalorieCalc(test_dictionary)
+'''
+from YummlyDriver import RecipeQueryParameters
+p = RecipeQueryParameters()
+p.height = 71
+p.weight = 180
+p.age = 22
+p.gender = "Male"
+p.goal = "Lose 1"
+p.activityLevel = "lightly active"
+calc = CalorieCalc(p)
 cals = calc.get_calories()
 print("Calories per day: " + str(cals))
+'''
 
