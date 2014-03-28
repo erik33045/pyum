@@ -55,8 +55,8 @@ class RecipeQueryParameters:
     maxSodium = 0
     minCholesterol = 0
     maxCholesterol = 0
-    minFattyAcids = 0
-    maxFattyAcids = 0
+    minFatSat = 0
+    maxFatSat = 0
     minCarbs = 0
     maxCarbs = 0
     minFiber = 0
@@ -75,6 +75,9 @@ class RecipeQueryParameters:
     maxCalories = 0
     minVitaminA = 0
     maxVitaminA = 0
+    minTransFat = 0
+    maxTransFat = 0
+
 
     def to_dictionary(self):
         return_dictionary = {"q": self.q}
@@ -117,57 +120,61 @@ class RecipeQueryParameters:
         if self.piquantMaxFlavor > 0.0:
             return_dictionary['flavor.piquant.max'] = self.piquantMaxFlavor
         if self.minFat > 0.0:
-            return_dictionary['nutrition.fat.min'] = self.minFat
+            return_dictionary['nutrition.FAT.min'] = self.minFat
         if self.maxFat > 0.0:
-            return_dictionary['nutrition.fat.max'] = self.maxFat
+            return_dictionary['nutrition.FAT.max'] = self.maxFat
         if self.minSodium > 0.0:
-            return_dictionary['nutrition.sodium.min'] = self.minSodium
+            return_dictionary['nutrition.NA.min'] = self.minSodium
         if self.maxSodium > 0.0:
-            return_dictionary['nutrition.sodium.max'] = self.maxSodium
+            return_dictionary['nutrition.NA.max'] = self.maxSodium
         if self.minCholesterol > 0.0:
-            return_dictionary['nutrition.cholesterol.min'] = self.minCholesterol
+            return_dictionary['nutrition.CHOLE.min'] = self.minCholesterol
         if self.maxCholesterol > 0.0:
-            return_dictionary['nutrition.cholesterol.max'] = self.maxCholesterol
-        if self.minFattyAcids > 0.0:
-            return_dictionary['nutrition.fattyacids.min'] = self.minFattyAcids
-        if self.maxFattyAcids > 0.0:
-            return_dictionary['nutrition.fattyacides.max'] = self.maxFattyAcids
+            return_dictionary['nutrition.CHOLE.max'] = self.maxCholesterol
+        if self.minFatSat > 0.0:
+            return_dictionary['nutrition.FATSAT.min'] = self.minFatSat
+        if self.maxFatSat > 0.0:
+            return_dictionary['nutrition.FATSAT.max'] = self.maxFatSat
         if self.minCarbs > 0.0:
-            return_dictionary['nutrition.carbs.min'] = self.minCarbs
+            return_dictionary['nutrition.CHOCDF.min'] = self.minCarbs
         if self.minCarbs > 0.0:
-            return_dictionary['nutrition.carbs.max'] = self.maxCarbs
+            return_dictionary['nutrition.CHOCDF.max'] = self.maxCarbs
         if self.minFiber > 0.0:
-            return_dictionary['nutrition.fiber.min'] = self.minFiber
+            return_dictionary['nutrition.FIBTG.min'] = self.minFiber
         if self.maxFiber > 0.0:
-            return_dictionary['nutrition.fiber.max'] = self.maxFiber
+            return_dictionary['nutrition.FIBTG.max'] = self.maxFiber
         if self.minProtein > 0.0:
-            return_dictionary['nutrition.protein.min'] = self.minProtein
+            return_dictionary['nutrition.PROCNT.min'] = self.minProtein
         if self.maxProtein > 0.0:
-            return_dictionary['nutrition.protein.max'] = self.maxProtein
+            return_dictionary['nutrition.PROCNT.max'] = self.maxProtein
         if self.minVitaminC > 0.0:
-            return_dictionary['nutrition.vitaminc.min'] = self.minVitaminC
+            return_dictionary['nutrition.VITC.min'] = self.minVitaminC
         if self.maxVitaminC > 0.0:
-            return_dictionary['nutrition.vitaminc.max'] = self.maxVitaminC
+            return_dictionary['nutrition.VITC.max'] = self.maxVitaminC
         if self.minCalcium > 0.0:
-            return_dictionary['nutrition.calcium.min'] = self.minCalcium
+            return_dictionary['nutrition.CA.min'] = self.minCalcium
         if self.maxCalcium > 0.0:
-            return_dictionary['nutrition.calcium.max'] = self.maxCalcium
+            return_dictionary['nutrition.CA.max'] = self.maxCalcium
         if self.minIron > 0.0:
-            return_dictionary['nutrition.iron.min'] = self.minIron
+            return_dictionary['nutrition.FE.min'] = self.minIron
         if self.maxIron > 0.0:
-            return_dictionary['nutrition.iron.max'] = self.maxIron
+            return_dictionary['nutrition.FE.max'] = self.maxIron
         if self.minSugar > 0.0:
-            return_dictionary['nutrition.sugar.min'] = self.minSugar
+            return_dictionary['nutrition.SUGAR.min'] = self.minSugar
         if self.maxSugar > 0.0:
-            return_dictionary['nutrition.sugar.max'] = self.maxSugar
+            return_dictionary['nutrition.SUGAR.max'] = self.maxSugar
         if self.minCalories > 0.0:
-            return_dictionary['nutrition.calories.min'] = self.minCalories
+            return_dictionary['nutrition.ENERC_KCAL.min'] = self.minCalories
         if self.maxCalories > 0.0:
-            return_dictionary['nutrition.calories.max'] = self.maxCalories
+            return_dictionary['nutrition.ENERC_KCAL.max'] = self.maxCalories
         if self.minVitaminA > 0.0:
-            return_dictionary['nutrition.vitamina.min'] = self.minVitaminA
+            return_dictionary['nutrition.VITA_IU.min'] = self.minVitaminA
         if self.maxVitaminA > 0.0:
-            return_dictionary['nutrition.vitamina.max'] = self.maxVitaminA
+            return_dictionary['nutrition.VITA_IU.max'] = self.maxVitaminA
+        if self.minTransFat > 0.0:
+            return_dictionary['nutrition.FATRN.min'] = self.minTransFat
+        if self.maxTransFat > 0.0:
+            return_dictionary['nutrition.FATRN.max'] = self.maxTransFat
 
         return return_dictionary
 
