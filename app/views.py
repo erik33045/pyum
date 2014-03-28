@@ -113,7 +113,7 @@ def user_login(request):
 
 def search_recipes(request):
     x = YummlyDriver.RecipeQueryParameters()
-    x.q = "hot and sour soup"
+    x.q = "soup"
     results = YummlyDriver.search_recipes(x).matches
     table_data = app.tables.map_from_result_list(results)
 

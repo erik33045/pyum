@@ -1,7 +1,8 @@
 table.paleblue {
     border-collapse: collapse;
-    border-color: #CCC;
-    border: 1px solid #DDD;
+    border-color: #000;
+    border: 1px solid #000;
+    width: 100%;
 }
 
 table.paleblue,
@@ -25,7 +26,7 @@ table.paleblue td,
 table.paleblue th {
     padding: 5px;
     line-height: 13px;
-    border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid #000;
     border-left: 1px solid #DDD;
     text-align: left;
 }
@@ -38,7 +39,7 @@ table.paleblue thead td:first-child {
 table.paleblue thead th,
 table.paleblue thead td {
     background: #FCFCFC url(../img/header-bg.png) left bottom repeat-x;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #000;
     padding: 2px 5px;
     font-size: 11px;
     vertical-align: middle;
@@ -62,7 +63,7 @@ table.paleblue thead th.orderable.desc > a {
 }
 
 table.paleblue tr.odd {
-    background-color: #EDF3FE;
+    background-color: rgba(116, 24, 20, 0.71);
 }
 
 table.paleblue tr.even {
@@ -74,7 +75,7 @@ table.paleblue + ul.pagination {
     overflow: auto;
     margin: 0;
     padding: 10px;
-    border: 1px solid #DDD;
+    border: 1px solid #000;
     list-style: none;
 }
 
@@ -124,4 +125,6 @@ table.paleblue > tbody > tr > td > span.false {
 
 div.table-container {
     display: inline-block;
+    width: 100%;
+    color: black;
 }

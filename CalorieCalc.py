@@ -1,48 +1,88 @@
-def get_bmi(height, weight):
-    bmi = ((weight * 703) / (height ** 2))
-    return bmi
+class CalorieCalc:
+    age = 0
+    weight = 0
+    height = 0
+    gender = ""
+    goal = ""
+    activityLevel = ""
+
+    def __init__(self, info):
+        self.age = info.age
+        self.weight = info.weight
+        self.height = info.height
+        self.gender = info.gender
+        self.goal = info.goal
+        self.activityLevel = info.activityLevel
+
+    def get_bmi(self):
+        bmi = ((self.weight * 703.0) / (self.height ** 2.0))
+        bmi = round(bmi, 1)
+        return bmi
 
 
-def get_bmr(height, weight, gender, age):
-    if gender == "female":
-        bmr = 655 + (4.35 * weight) + (4.7 * height) - (4.7 * age)
-    if gender == "male":
-        bmr = 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age)
-    return bmr
+    def get_bmr(self):
+        if self.gender == "Female":
+            bmr = 655 + (4.35 * self.weight) + (4.7 * self.height) - (4.7 * self.age)
+        elif self.gender == "Male":
+            bmr = 66 + (6.23 * self.weight) + (12.7 * self.height) - (6.8 * self.age)
+        return bmr
 
 
-def get_calories(bmi, bmr, activity_level):
-    calories = 0
-    if activity_level == "sedentary":
-        calories = bmr * 1.2
-    elif activity_level == "lightly active":
-        calories = bmr * 1.375
-    elif activity_level == "moderately active":
-        calories = bmr * 1.55
-    elif activity_level == "very active":
-        calories = bmr * 1.725
-    elif activity_level == "extra active":
-        calories = bmr * 1.9
+    def get_calories(self):
+        calories = 0
+        bmr = self.get_bmr()
+        if self.activityLevel == "sedentary":
+            calories = bmr * 1.2
+        elif self.activityLevel == "lightly active":
+            calories = bmr * 1.375
+        elif self.activityLevel == "moderately active":
+            calories = bmr * 1.55
+        elif self.activityLevel == "very active":
+            calories = bmr * 1.725
+        elif self.activityLevel == "extra active":
+            calories = bmr * 1.9
 
-    #if underweight, eat at 500 calorie surplus (1 pound per week)
-    if bmi < 18.5:
-        calories += 500
+        #lose 2 pounds per week
+        if self.goal == "Lose 2":
+            calories -= 1000
 
-    #if overweight, eat at 500 calorie deficit
-    elif bmi >= 25:
-        calories -= 500
+        #lose 1 pound per week
+        elif self.goal == "Lose 1":
+            calories -= 500
 
-    #if BMI in normal range, maintain weight
+        #lose 1/2 pound per week
+        elif self.goal == "Lose 1/2":
+            calories -= 250
 
-    calories = int(calories)
-    return calories
+        #gain 2 pounds per week
+        elif self.goal == "Gain 2":
+            calories += 1000
+
+        #gain 1 pound per week
+        elif self.goal == "Gain 1":
+            calories += 500
+
+        #gain 1/2 pound per week
+        elif self.goal == "Gain 1/2":
+            calories += 250
+
+        #if BMI in normal range, maintain weight
+
+        calories = int(calories)
+        return calories
 
 #testing functions
-BMI = get_bmi(71, 180)
-print(BMI)
-BMR = get_bmr(71, 180, "male", 22)
-cals = get_calories(BMI, BMR, "lightly active")
-print(cals)
-
-
+'''
+from YummlyDriver import RecipeQueryParameters
+p = RecipeQueryParameters()
+p.height = 71
+p.weight = 180
+p.age = 22
+p.gender = "Male"
+p.goal = "Lose 1"
+p.activityLevel = "lightly active"
+calc = CalorieCalc(p)
+cals = calc.get_calories()
+print("Calories per day: " + str(cals))
+'''
 
