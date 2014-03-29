@@ -3,36 +3,30 @@
 <head>
     <title>Pyum</title>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static " app
-    /templatemo_style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
 </head>
 
 <body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/>
-<script type="text/javascript">
-    function meal_button_click(){
-        alert("Hi");
-    }
-
+<script type='text/javascript' src='{% static "app/js/jquery.min.js" %}'></script>
+<script>
     $(document).ready(function(){
-        $.ajax({
-            url: "www.google.com",
-            success: function(result){
-                $("#results").html(result);
-            }
+        $('#find_meal').click(function () {
+            find_meal_click()
         });
+
+        function find_meal_click() {
+            alert("Thank god!");
+        }
     });
-
-
 </script>
 
-<div id="result"/>
+<div id="results"></div>
 <div id="templatemo_main" style="background-color: #771201; height: 400px">
     <div class="content_wrapper" style="background-color: #FFFFFF; width: 50%; margin-left: auto; margin-right: auto">
         <h1 style="margin-right: auto; margin-left: auto; margin-top: 10px; text-align: center">Home</h1>
 
         <div id="button">
-            <input type="button" value="Find Me A Meal"></button>
+            <input id="find_meal" type="button" value="Find Me A Meal"></button>
         </div>
     </div>
     <div class="clear"></div>
