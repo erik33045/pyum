@@ -120,3 +120,7 @@ def search_recipes(request):
     table = app.tables.ResultTable(table_data)
     RequestConfig(request).configure(table)
     return render(request, 'recipes.html', {'table': table})
+
+
+def home(request):
+    return render_to_response('app/home.html', {})
