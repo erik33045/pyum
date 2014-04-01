@@ -11,6 +11,10 @@ class YummlyApiInfo:
     Id = '1db8b5cc'
     Key = 'd470fadf2ef7bdcaec50be759255006a'
 
+    #Mark's Key
+    #Id= '694cee2e'
+    #Key = '392df3bc63518ea410eef68eb6da066e'
+
 
 class RecipeQueryParameters:
     def __init__(self):
