@@ -18,29 +18,43 @@
 
 <body>
 <div id="templatemo_main" style="background-color: #771201; height: 400px">
+
     <div id="div_main" class="content_wrapper">
         <h1 style="margin-right: auto; margin-left: auto; margin-top: 10px; text-align: center">Home</h1>
 
         <div id="button">
-            <input id="find_meal" type="button" value="Find Me A Meal"/>
+            <input id="button_find_meal" type="button" value="Find Me A Meal"/>
         </div>
     </div>
+
     <div id="div_search" class="content_wrapper">
-        <div id="div_calorie" style="padding_top: 4px; float: right; text-align: left">
-            <input id="calorie_intake"> Today's calorie intake: </input>
-        </div>
-        Current weight:
-        Meals left in day:
-        <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select>
-        Including ingredients:
-        Excluding ingredients:
-        Total prep time:
+        <form id="form_search" style="textAlign:left;">
+            Current weight: <input type="text" name="current_weight"><br>
+            Meals left in day:
+            <select id="num_meals">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+
+        Including ingredients:<input type="text" name="in_ingredients"><br>
+        Excluding ingredients:<input type="text" name="ex_ingredients"><br>
+        Total prep time(minutes):<input type="text" name="prep_time"><br>
         Sweetness:
+        <label for="sweetness">Sweetness:</label>
+        <select name="sweetness" id="sweetness">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+        </select>
         Meatiness:
         Sourness:
         Bitterness:
@@ -50,20 +64,44 @@
 
     <div class="clear"></div>
 </div>
+<link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css" %}'>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js" %}'></script>
+<link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" %}'>
 
+<script type='text/javascript' src='{% static "app/js/jquery-ui.min.js" %}'></script>
 <script type='text/javascript' src='{% static "app/js/jquery.min.js" %}'></script>
 <script>
     $(document).ready(function(){
         $('#div_search').hide();
-        $('#find_meal').click(function () {
-            find_meal_click();
+        $('#button_find_meal').click(function () {
+            button_find_meal_click();
         });
 
-        function find_meal_click() {
+        function button_find_meal_click() {
             $( "#div_search" ).show("drop");
         }
     });
-</script>
 
+
+</script>
+<script>
+  $(function() {
+    var select = $( "#sweetness" );
+    var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
+      min: 1,
+      max: 6,
+      range: "min",
+      value: select[ 0 ].selectedIndex + 1,
+      slide: function( event, ui ) {
+        select[ 0 ].selectedIndex = ui.value - 1;
+      }
+    });
+    $( "#sweetness" ).change(function() {
+      slider.slider( "value", this.selectedIndex + 1 );
+    });
+  });
+
+</script>
 </body>
 </html>

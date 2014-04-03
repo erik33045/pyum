@@ -6,8 +6,8 @@ class YummlyApiInfo:
     def __init__(self):
         pass
 
-    Id = '1db8b5cc'
-    Key = 'd470fadf2ef7bdcaec50be759255006a'
+    Id = '17f360b5'
+    Key = '214819cbde16a118c615fc0061e6dc8b'
 
 
 class RecipeQueryParameters:
