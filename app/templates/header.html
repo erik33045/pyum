@@ -1,0 +1,42 @@
+<html>
+<head>
+    <style type="text/css">
+        ul {
+            margin-top: 10px;
+            padding-top: 10px;
+            list-style-type: none;
+        }
+
+        li {
+            display: inline;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}app/css/screen.css"/>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
+</head>
+<body>
+<div id="templatemo_main" style="background-color: #771201;">
+    <div class="content_wrapper"
+         style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto; border: solid 1px black">
+        <div id="sidebar" style="float: left; width: 100%">
+            {% block sidebar %}
+                <div style="float: left; width: 90%; margin: 0; vertical-align: middle; padding: 0 0 0 6px;">
+                    <ul style="padding: 0; margin: 0">
+                        <li><a href="/app/home">Home</a></li>
+                        <li><a href="/app/login">Login</a></li>
+                        <li><a href="/app/register">Register</a></li>
+                    </ul>
+                </div>
+                <div style="float: left; text-align: right;width: 100px; margin: 0; vertical-align: middle; padding: 0;">
+                    <a href="/app/logout">Logout</a>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

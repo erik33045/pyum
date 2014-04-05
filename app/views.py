@@ -1,6 +1,5 @@
-from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render
 from django_tables2 import RequestConfig
@@ -11,8 +10,6 @@ import YummlyDriver
 
 
 def register(request):
-    context = RequestContext(request)
-
     # A boolean value for telling the template whether the registration was successful.
     # Set to False initially. Code changes value to True when registration succeeds.
     registered = False
@@ -64,10 +61,9 @@ def register(request):
         profile_form = AppUserForm()
 
     # Render the template depending on the context.
-    return render_to_response(
-        'app/register.html',
-        {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
-        context)
+    # noinspection PyUnresolvedReferences
+    return render(request, 'app/register.html',
+                  {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
 def user_login(request):
@@ -94,7 +90,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/app/')
+                return render(request, 'app/home.html', {})
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Pyum account is disabled.")
@@ -108,7 +104,8 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render_to_response('app/login.html', {}, context)
+        # noinspection PyUnresolvedReferences
+        return render(request, 'app/login.html', {})
 
 
 def search_recipes(request):
@@ -119,8 +116,18 @@ def search_recipes(request):
 
     table = app.tables.ResultTable(table_data)
     RequestConfig(request).configure(table)
+    # noinspection PyUnresolvedReferences
     return render(request, 'recipes.html', {'table': table})
 
 
+# noinspection PyUnresolvedReferences
 def home(request):
-    return render_to_response('app/home.html', {})
+    if request.user.is_authenticated():
+        return render(request, 'app/home.html', {})
+    else:
+        return render(request, 'app/login.html', {})
+
+
+def user_logout(request):
+    logout(request)
+    return render(request, 'app/login.html', {})

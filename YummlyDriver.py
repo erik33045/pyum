@@ -8,8 +8,8 @@ class YummlyApiInfo:
         pass
 
     # Erik's Key
-    #Id = '1db8b5cc'
-    #Key = 'd470fadf2ef7bdcaec50be759255006a'
+    # Id = '1db8b5cc'
+    # Key = 'd470fadf2ef7bdcaec50be759255006a'
 
 
     #Vi's Key
@@ -68,7 +68,7 @@ class RecipeQueryParameters:
     piquantMinFlavor = 0.0
     piquantMaxFlavor = 0.0
 
-    #Nutrition stuff
+    # Nutrition stuff
     minFat = 0
     maxFat = 0
     minSodium = 0
@@ -202,10 +202,10 @@ class RecipeQueryParameters:
 def search_recipes(recipe_query_parameters):
     # passed in partial recipe parameters object
     if not recipe_query_parameters.ignore_user_preferences:
-        #call calculator to figure out desired meals
+        # call calculator to figure out desired meals
         calc = CalorieCalc(recipe_query_parameters)
 
-        #calculate max calories for meal
+        # calculate max calories for meal
         recipe_query_parameters.maxCalories = calc.get_calories() - recipe_query_parameters.caloriesConsumed
 
         if recipe_query_parameters.mealsLeft > 0:
@@ -217,7 +217,7 @@ def search_recipes(recipe_query_parameters):
             recipe_query_parameters.minCarbs = 45
             recipe_query_parameters.maxSodium = 0.4
 
-    #have yummly driver query data
+    # have yummly driver query data
     client = Client(api_id=YummlyApiInfo.Id, api_key=YummlyApiInfo.Key)
     return_dictionary = recipe_query_parameters.to_dictionary()
     return client.search(**return_dictionary)
@@ -240,4 +240,5 @@ def find():
     print str(results)
 
 
-find()
+if __name__ == '__main__':
+    find()

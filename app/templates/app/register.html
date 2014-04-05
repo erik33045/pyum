@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <!--suppress HtmlUnknownTarget -->
 <html>
-<head>
-    <title>Pyum</title>
+
+{% extends "header.html" %}
+{% block title %}My amazing blog{% endblock %}
+{% block content %}
+    <head>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
+        <title>Pyum</title>
 
-</head>
-<body>
+
+    </head>
+    <body>
 
 
 <div id="templatemo_main" style="background-color: #771201;">
@@ -37,4 +42,5 @@
     <div class="clear"></div>
 </div>
 </body>
+{% endblock %}
 </html>
