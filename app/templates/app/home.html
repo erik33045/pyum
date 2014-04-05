@@ -71,13 +71,25 @@
             Including ingredients:<input type="text" name="in_ingredients"><br>
             Excluding ingredients:<input type="text" name="ex_ingredients"><br>
             Total prep tim\e(minutes):<input type="text" name="prep_time"><br>
-            Sweetness:
-            <p>
-                <label for="amount">Meatiness:</label>
-                <input type="text" id="amount" style="border:0; color:#771201; font-weight:bold;">
-            </p>
 
-            <div id="slider-range"></div>
+            <div class="slider">
+                <p>
+                    <label for="amount-sweetness">Sweetness:</label>
+                    <input type="text" id="amount-sweetness" class="amount"
+                           style="border:0; color:#771201; font-weight:bold;">
+                </p>
+
+                <div id="range-sweetness" class="slider-range"></div>
+            </div>
+            <div class="slider">
+                <p>
+                    <label for="amount-meatiness">Meatiness:</label>
+                    <input type="text" id="amount-meatiness" class="amount"
+                           style="border:0; color:#771201; font-weight:bold;">
+                </p>
+
+                <div id="range-meatiness" class="slider-range"></div>
+            </div>
             Sourness:
             Bitterness:
             Spiciness:
@@ -115,19 +127,20 @@
     });
 
 //Functionality for slider
-$(function() {
-    $( "#slider-range" ).slider({
+$(".slider").each(function() {
+    var $this = $(this);
+    $( ".slider-range", $this).slider({
       range: true,
       min: 0,
       max: 10,
       step: 1,
-      values: [ 1, 5 ],
+      values: [ 0, 5 ],
       slide: function( event, ui ) {
-        $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+        $( ".amount", $this ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
     });
-    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
-      " - " + $( "#slider-range" ).slider( "values", 1 ) );
+    $( ".amount", $this).val($( ".slider-range", $this ).slider( "values", 0 ) +
+      " - " + $( ".slider-range", $this ).slider( "values", 1 ) );
   });
 
 </script>
