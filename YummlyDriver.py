@@ -10,17 +10,23 @@ class YummlyApiInfo:
     # Erik's Key
     #Id = '1db8b5cc'
     #Key = 'd470fadf2ef7bdcaec50be759255006a'
-    
+
+
+    #Vi's Key
     Id = '17f360b5'
     Key = '214819cbde16a118c615fc0061e6dc8b'
+
+    # Erik's Key
+    #Id = '1db8b5cc'
+    #Key = 'd470fadf2ef7bdcaec50be759255006a'
 
     #Mark's Key
     #Id= '694cee2e'
     #Key = '392df3bc63518ea410eef68eb6da066e'
 
     #Greg's Key
-    Id = 'c406a4d1'
-    Key = '654c0671661c94a799e761615c36cdd5'
+    #Id = 'c406a4d1'
+    #Key = '654c0671661c94a799e761615c36cdd5'
 
 
 class RecipeQueryParameters:

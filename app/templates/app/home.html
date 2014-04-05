@@ -6,13 +6,37 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
     <style type="text/css">
-        #div_search, #div_main{
+        #div_main{
         background-color: #FFFFFF;
         width: 50%;
         margin-right: auto;
         margin-left: auto;
         text-align: center;
         }
+        #div_search{
+        background-color: #FFFFFF;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        align: left;
+        }
+        #slider-range{
+        background: #771201;
+        }
+        .ui-slider-handle{
+        }
+        .ui-slider{
+        width: 50%;
+        table-layout: auto;
+        margin-top: auto;
+        margin-left: 0px;
+        margin-right: auto;
+        margin-bottom: auto;
+        background: #771201;
+        align: left;
+
+        }
+
     </style>
 </head>
 
@@ -38,39 +62,42 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
-            </select>
+            </select><br>
+
+            Including ingredients:<input type="text" name="in_ingredients"><br>
+            Excluding ingredients:<input type="text" name="ex_ingredients"><br>
+            Total prep time(minutes):<input type="text" name="prep_time"><br>
+            Sweetness:
+            <p>
+                <label for="amount">Meatiness:</label>
+                <input type="text" id="amount" style="border:0; color:#771201; font-weight:bold;">
+            </p>
+
+            <div id="slider-range"></div>
+            Sourness:
+            Bitterness:
+            Spiciness:
             <input type="submit" value="Submit">
         </form>
-
-        Including ingredients:<input type="text" name="in_ingredients"><br>
-        Excluding ingredients:<input type="text" name="ex_ingredients"><br>
-        Total prep time(minutes):<input type="text" name="prep_time"><br>
-        Sweetness:
-        <label for="sweetness">Sweetness:</label>
-        <select name="sweetness" id="sweetness">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-        </select>
-        Meatiness:
-        Sourness:
-        Bitterness:
-        Spiciness:
 
     </div>
 
     <div class="clear"></div>
 </div>
 <link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css" %}'>
-<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" %}'></script>
-<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js" %}'></script>
+
 <link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" %}'>
 
-<script type='text/javascript' src='{% static "app/js/jquery-ui.min.js" %}'></script>
-<script type='text/javascript' src='{% static "app/js/jquery.min.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.core.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.widget.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.mouse.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.slider.js" %}'></script>
 <script>
     $(document).ready(function(){
         $('#div_search').hide();
@@ -83,23 +110,20 @@
         }
     });
 
-
-</script>
-<script>
-  $(function() {
-    var select = $( "#sweetness" );
-    var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
-      min: 1,
-      max: 6,
-      range: "min",
-      value: select[ 0 ].selectedIndex + 1,
+//Functionality for slider
+$(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 10,
+      step: 1,
+      values: [ 1, 5 ],
       slide: function( event, ui ) {
-        select[ 0 ].selectedIndex = ui.value - 1;
+        $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
     });
-    $( "#sweetness" ).change(function() {
-      slider.slider( "value", this.selectedIndex + 1 );
-    });
+    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) );
   });
 
 </script>
