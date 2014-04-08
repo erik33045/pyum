@@ -49,18 +49,18 @@ class RecipeQueryParameters:
     start = 0
     maxResult = 25
     requirePictures = False
-    allowedIngredients = []
-    excludedIngredients = []
-    facetField = []
-    allowedDiet = []
-    allowedAlergy = []
-    maxTotalTimeInSeconds = 0
+    allowed_ingredients = []
+    excluded_ingredients = []
+    facet_field = []
+    allowed_diet = []
+    allergies = []
+    max_total_time_in_seconds = 0
 
     # Flavor stuff
-    sweetMinFlavor = 0.0
-    sweetMaxFlavor = 0.0
-    meatyMinFlavor = 0.0
-    meatyMaxFlavor = 0.0
+    sweet_min_flavor = 0.0
+    sweet_max_flavor = 0.0
+    meaty_min_flavor = 0.0
+    meaty_max_flavor = 0.0
     sourMinFlavor = 0.0
     sourMaxFlavor = 0.0
     bitterMinFlavor = 0.0
@@ -98,35 +98,36 @@ class RecipeQueryParameters:
     minTransFat = 0
     maxTransFat = 0
 
-
     def to_dictionary(self):
-        return_dictionary = {"q": self.q}
+        return_dictionary = {}
+        if self.q != "":
+            return_dictionary["q"] = self.q
         if self.start > 0:
             return_dictionary['start'] = self.start
         if self.maxResult != 40:
             return_dictionary['maxResult'] = self.maxResult
         if self.requirePictures:
             return_dictionary['requirePictures'] = True
-        if len(self.allowedIngredients) > 0:
-            return_dictionary['allowedIngredient[]'] = self.allowedIngredients
-        if len(self.excludedIngredients) > 0:
-            return_dictionary['excludedIngredient[]'] = self.allowedIngredients
-        if len(self.facetField) > 0:
-            return_dictionary['facetField[]'] = self.facetField
-        if len(self.allowedDiet) > 0:
-            return_dictionary['allowedDiet[]'] = self.allowedDiet
-        if len(self.allowedAlergy) > 0:
-            return_dictionary['allowedAlergy[]'] = self.allowedAlergy,
-        if self.maxTotalTimeInSeconds > 0:
-            return_dictionary['maxTotalTimeInSeconds'] = self.maxTotalTimeInSeconds
-        if self.sweetMinFlavor > 0.0:
-            return_dictionary['flavor.sweet.min'] = self.sweetMinFlavor
-        if self.sweetMaxFlavor > 0.0:
-            return_dictionary['flavor.sweet.max'] = self.sweetMaxFlavor
-        if self.meatyMinFlavor > 0.0:
-            return_dictionary['flavor.meaty.min'] = self.meatyMinFlavor
-        if self.meatyMaxFlavor > 0.0:
-            return_dictionary['flavor.meaty.max'] = self.meatyMaxFlavor
+        if len(self.allowed_ingredients) > 0:
+            return_dictionary['allowedIngredient[]'] = self.allowed_ingredients
+        if len(self.excluded_ingredients) > 0:
+            return_dictionary['excludedIngredient[]'] = self.allowed_ingredients
+        if len(self.facet_field) > 0:
+            return_dictionary['facetField[]'] = self.facet_field
+        if len(self.allowed_diet) > 0:
+            return_dictionary['allowedDiet[]'] = self.allowed_diet
+        if len(self.allergies) > 0:
+            return_dictionary['allowedAlergy[]'] = self.allergies,
+        if self.max_total_time_in_seconds > 0:
+            return_dictionary['maxTotalTimeInSeconds'] = self.max_total_time_in_seconds
+        if self.sweet_min_flavor > 0.0:
+            return_dictionary['flavor.sweet.min'] = self.sweet_min_flavor
+        if self.sweet_max_flavor > 0.0:
+            return_dictionary['flavor.sweet.max'] = self.sweet_max_flavor
+        if self.meaty_min_flavor > 0.0:
+            return_dictionary['flavor.meaty.min'] = self.meaty_min_flavor
+        if self.meaty_max_flavor > 0.0:
+            return_dictionary['flavor.meaty.max'] = self.meaty_max_flavor
         if self.sourMinFlavor > 0.0:
             return_dictionary['flavor.sour.min'] = self.sourMinFlavor
         if self.sourMaxFlavor > 0.0:
@@ -239,6 +240,27 @@ def find():
     results = search_recipes(x)
     print str(results)
 
+
+def django_query_dictionary_to_parameter_object(dictionary):
+    parameter_object = RecipeQueryParameters()
+
+    parameter_object.weight = int(dictionary['current_weight'])
+
+    parameter_object.allowed_ingredients = dictionary['in_ingredients'].split(',')
+
+    parameter_object.excluded_ingredients = dictionary['ex_ingredients'].split(',')
+
+    parameter_object.max_total_time_in_seconds = int(dictionary['prep_time'])
+
+    sweetness = dictionary['amount-sweetness'].split('-')
+    parameter_object.sweet_min_flavor = float(sweetness[0]) / 10.00
+    parameter_object.sweet_max_flavor = float(sweetness[1]) / 10.00
+
+    meatiness = dictionary['amount-meatiness'].split('-')
+    parameter_object.meaty_min_flavor = float(meatiness[0]) / 10.00
+    parameter_object.meaty_max_flavor = float(meatiness[1]) / 10.00
+    parameter_object.ignore_user_preferences = True
+    return parameter_object
 
 if __name__ == '__main__':
     find()

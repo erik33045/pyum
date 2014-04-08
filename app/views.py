@@ -108,10 +108,12 @@ def user_login(request):
         return render(request, 'app/login.html', {})
 
 
-def search_recipes(request):
-    x = YummlyDriver.RecipeQueryParameters()
-    x.q = "soup"
-    results = YummlyDriver.search_recipes(x).matches
+def search_recipes(request, query_parameters):
+    if query_parameters is None:
+        query_parameters = YummlyDriver.RecipeQueryParameters()
+
+    search = YummlyDriver.search_recipes(query_parameters)
+    results = search.matches
     table_data = app.tables.map_from_result_list(results)
 
     table = app.tables.ResultTable(table_data)
@@ -123,6 +125,14 @@ def search_recipes(request):
 # noinspection PyUnresolvedReferences
 def home(request):
     if request.user.is_authenticated():
+        if request.method == "POST":
+            parameters = YummlyDriver.django_query_dictionary_to_parameter_object(request.POST)
+            #Need to put in the rest of the user parameters here if need be
+
+            print search_recipes(request, parameters)
+            #need to fire off the call to the recipes page
+            return httpResponsRedirect('recipes.htm')
+
         return render(request, 'app/home.html', {})
     else:
         return render(request, 'app/login.html', {})

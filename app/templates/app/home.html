@@ -56,7 +56,8 @@
     </div>
 
     <div id="div_search" class="content_wrapper">
-        <form id="form_search" style="textAlign:left;">
+        <form id="form_search" action="/app/home" method="POST" style="textAlign:left;">
+            {% csrf_token %}
             Current weight: <input type="text" name="current_weight"><br>
             Meals left in day:
             <select id="num_meals">
@@ -68,14 +69,20 @@
                 <option value="6">6</option>
             </select><br>
 
-            Including ingredients:<input type="text" name="in_ingredients"><br>
-            Excluding ingredients:<input type="text" name="ex_ingredients"><br>
-            Total prep tim\e(minutes):<input type="text" name="prep_time"><br>
+            <label for="in_ingredients">Including ingredients:
+                <input type="text" id="in_ingredients" name="in_ingredients">
+            </label><br>
+            <label for="ex_ingredients">Excluding ingredients:
+                <input type="text" id="ex_ingredients" name="ex_ingredients"/>
+            </label><br>
+            <label for="prep_time">Max prep time(minutes):
+                <input type="text" id="prep_time" name="prep_time">
+            </label><br>
 
             <div class="slider">
                 <p>
                     <label for="amount-sweetness">Sweetness:</label>
-                    <input type="text" id="amount-sweetness" class="amount"
+                    <input type="text" id="amount-sweetness" name="amount-sweetness" class="amount"
                            style="border:0; color:#771201; font-weight:bold;">
                 </p>
 
@@ -84,7 +91,7 @@
             <div class="slider">
                 <p>
                     <label for="amount-meatiness">Meatiness:</label>
-                    <input type="text" id="amount-meatiness" class="amount"
+                    <input type="text" id="amount-meatiness" name="amount-meatiness" class="amount"
                            style="border:0; color:#771201; font-weight:bold;">
                 </p>
 
@@ -95,7 +102,6 @@
             Spiciness:
             <input type="submit" value="Submit">
         </form>
-
     </div>
 
     <div class="clear"></div>

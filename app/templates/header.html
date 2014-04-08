@@ -18,17 +18,17 @@
 <body>
 <div id="templatemo_main" style="background-color: #771201;">
     <div class="content_wrapper"
-         style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto; border: solid 1px black">
-        <div id="sidebar" style="float: left; width: 100%">
+         style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto; border: solid 1px black; min-width: 500px">
+        <div id="sidebar" style="display: inline; width: 100%">
             {% block sidebar %}
-                <div style="float: left; width: 90%; margin: 0; vertical-align: middle; padding: 0 0 0 6px;">
+                <div style="margin: 0; float: left; width: 125px; vertical-align: middle; padding: 0 0 0 6px;">
                     <ul style="padding: 0; margin: 0">
                         <li><a href="/app/home">Home</a></li>
                         <li><a href="/app/login">Login</a></li>
                         <li><a href="/app/register">Register</a></li>
                     </ul>
                 </div>
-                <div style="float: left; text-align: right;width: 100px; margin: 0; vertical-align: middle; padding: 0;">
+                <div style="text-align: right; float: right; margin: 0; display: inline; vertical-align: middle; padding: 0;">
                     <a href="/app/logout">Logout</a>
                 </div>
             {% endblock %}
