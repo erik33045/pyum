@@ -8,13 +8,110 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}app/css/screen.css"/>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
+    <link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css" %}'>
+    <link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" %}'>
+    <style type="text/css">
+        #slider-range{
+            background: #771201;
+        }
+        .ui-slider-handle{
+        }
+        .ui-slider{
+            width: 50%;
+            table-layout: auto;
+            margin: auto auto auto 0;
+            background: #771201;
+            align: left;
+        }
+    </style>
 </head>
 
 <body>
-<div id="templatemo_main" style="background-color: #771201;">
+<div id="templatemo_main" style="background-color: #771201; min-height: 330px">
     <div class="content_wrapper" style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto">
-        {% render_table table %}
+
+        <div id="div_search" class="content_wrapper" style="width: 310px; float: left">
+            <form id="form_search" action="/pyum/search_recipes/" method="POST" style="text-align:left;">
+                {% csrf_token %}
+                Current weight: <input type="text" name="current_weight"><br>
+                Meals left in day:
+                <select id="num_meals">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select><br>
+
+                <label for="in_ingredients">Including ingredients:
+                    <input type="text" id="in_ingredients" name="in_ingredients">
+                </label><br>
+                <label for="ex_ingredients">Excluding ingredients:
+                    <input type="text" id="ex_ingredients" name="ex_ingredients"/>
+                </label><br>
+                <label for="prep_time">Max prep time(minutes):
+                    <input type="text" id="prep_time" name="prep_time">
+                </label><br>
+
+                <div class="slider">
+                    <p>
+                        <label for="amount-sweetness">Sweetness:</label>
+                        <input type="text" id="amount-sweetness" name="amount-sweetness" class="amount"
+                               style="border:0; color:#771201; font-weight:bold;">
+                    </p>
+
+                    <div id="range-sweetness" class="slider-range"></div>
+                </div>
+                <div class="slider">
+                    <p>
+                        <label for="amount-meatiness">Meatiness:</label>
+                        <input type="text" id="amount-meatiness" name="amount-meatiness" class="amount"
+                               style="border:0; color:#771201; font-weight:bold;">
+                    </p>
+
+                    <div id="range-meatiness" class="slider-range"></div>
+                </div>
+                Sourness:
+                Bitterness:
+                Spiciness:
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div id="table" style="float: left; width: 830px">
+            {% render_table table %}
+        </div>
     </div>
 </div>
+
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.core.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.widget.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.mouse.js" %}'></script>
+<script type='text/javascript'
+        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.slider.js" %}'></script>
+<script type="text/javascript">
+    //Functionality for slider
+    $(".slider").each(function() {
+        var $this = $(this);
+        $( ".slider-range", $this).slider({
+            range: true,
+            min: 0,
+            max: 10,
+            step: 1,
+            values: [ 0, 5 ],
+            slide: function( event, ui ) {
+                $( ".amount", $this ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            }
+        });
+        $( ".amount", $this).val($( ".slider-range", $this ).slider( "values", 0 ) +
+                " - " + $( ".slider-range", $this ).slider( "values", 1 ) );
+    });
+</script>
+
 </body>
 </html>

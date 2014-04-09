@@ -220,25 +220,9 @@ def search_recipes(recipe_query_parameters):
 
     # have yummly driver query data
     client = Client(api_id=YummlyApiInfo.Id, api_key=YummlyApiInfo.Key)
+    recipe_query_parameters.q = "bacon"
     return_dictionary = recipe_query_parameters.to_dictionary()
     return client.search(**return_dictionary)
-
-
-# This is a test method to ensure proper functionality
-def find():
-    x = RecipeQueryParameters()
-    x.activityLevel = "sedentary"
-    x.age = 20
-    x.caloriesConsumed = 2000
-    x.gender = "Male"
-    x.goal = "Lose 1"
-    x.height = 72
-    x.weight = 250
-    x.mealsLeft = 1
-    x.diabetic = True
-    x.q = "bacon"
-    results = search_recipes(x)
-    print str(results)
 
 
 def django_query_dictionary_to_parameter_object(dictionary):
@@ -253,7 +237,7 @@ def django_query_dictionary_to_parameter_object(dictionary):
     parameter_object.max_total_time_in_seconds = int(dictionary['prep_time'])
 
     sweetness = dictionary['amount-sweetness'].split('-')
-    parameter_object.sweet_min_flavor = float(sweetness[0]) / 10.00
+    parameter_object.sweet_min_flavor = (float(sweetness[0]) / 10.00).format
     parameter_object.sweet_max_flavor = float(sweetness[1]) / 10.00
 
     meatiness = dictionary['amount-meatiness'].split('-')
@@ -261,6 +245,3 @@ def django_query_dictionary_to_parameter_object(dictionary):
     parameter_object.meaty_max_flavor = float(meatiness[1]) / 10.00
     parameter_object.ignore_user_preferences = True
     return parameter_object
-
-if __name__ == '__main__':
-    find()

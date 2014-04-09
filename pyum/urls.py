@@ -7,6 +7,5 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'^pyum/', include('app.urls')),
                        url(r'^app/', include('app.urls')),
-                       url(r'^', include('app.urls')),
                        url(r'^admin/', include(admin.site.urls)),
 )
