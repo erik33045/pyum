@@ -202,10 +202,10 @@ def search_recipes(recipe_query_parameters):
         calc = CalorieCalc(recipe_query_parameters)
 
         # calculate max calories for meal
-        recipe_query_parameters.max_calories = calc.get_calories() - recipe_query_parameters.caloriesConsumed
+        recipe_query_parameters.max_calories = calc.get_calories() - recipe_query_parameters.calories_consumed
 
-        if recipe_query_parameters.mealsLeft > 0:
-            recipe_query_parameters.max_calories /= recipe_query_parameters.mealsLeft
+        if recipe_query_parameters.meals_left > 0:
+            recipe_query_parameters.max_calories /= recipe_query_parameters.meals_left
 
         #diabetic info
         if recipe_query_parameters.diabetic:
@@ -252,8 +252,9 @@ def django_query_to_parameter_object(post_data_dictionary, user):
             parameter_object.weight = int(post_data_dictionary['calories_consumed'])
 
         parameter_object.age = user.age
+        parameter_object.gender = user.gender
         parameter_object.activity_level = user.activity_level.level
-        parameter_object.allowed_diet = user.yummlydiet
+        parameter_object.allowed_diet = user.yummlydiet.searchValue
         parameter_object.allergies = user.allergies.all()
         parameter_object.diabetic = user.diabetic
         parameter_object.goal = user.goal.goal

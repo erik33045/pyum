@@ -20,9 +20,9 @@ class CalorieCalc:
         return bmi
 
     def get_bmr(self):
-        if self.gender == "Female":
+        if str(self.gender) == "Female":
             bmr = 655 + (4.35 * self.weight) + (4.7 * self.height) - (4.7 * self.age)
-        elif self.gender == "Male":
+        elif str(self.gender) == "Male":
             bmr = 66 + (6.23 * self.weight) + (12.7 * self.height) - (6.8 * self.age)
         return bmr
 

@@ -1,8 +1,14 @@
 
 
-{% load render_table from django_tables2 %}
+
 <!doctype html>
 <html>
+
+{% extends "header.html" %}
+{% block title %}My amazing blog{% endblock %}
+{% block content %}
+{% load render_table from django_tables2 %}
+
 <head>
     <title>Recipe Results</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}app/css/screen.css"/>
@@ -170,3 +176,4 @@
 
 </body>
 </html>
+{% endblock %}
