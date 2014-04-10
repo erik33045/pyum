@@ -39,7 +39,7 @@ class AppUser(models.Model):
     age = models.IntegerField()
     height = models.IntegerField()
     activity_level = models.ForeignKey(ActivityLevel, default=1)
-    goal = models.ForeignKey(Goal, default=4)
+    goal = models.ForeignKey(Goal, default=5)
     diabetic = models.BooleanField(default=False)
 
     def __unicode__(self):
