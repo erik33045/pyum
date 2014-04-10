@@ -113,13 +113,8 @@ def user_login(request):
 def search_recipes(request):
     if request.user.is_authenticated():
         if request.method == "POST":
-            # pull parameters out of the post object
-            appUser = request.user.appuser
-
-            if not appUser.yummlydiet.searchValue == "None":
-                appUser.yummlydiet.searchValue
-
-            parameters = YummlyDriver.django_query_to_parameter_object(request.POST)
+            #Create Parameter Query for Yummly API
+            parameters = YummlyDriver.django_query_to_parameter_object(request.POST, request.user.appuser)
             # query for the matches
             results = YummlyDriver.search_recipes(parameters).matches
             #map to table data and store in session

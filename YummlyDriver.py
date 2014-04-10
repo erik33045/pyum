@@ -195,22 +195,6 @@ class RecipeQueryParameters:
         return return_dictionary
 
 
-class UserPreferences:
-    def __init__(self):
-        pass
-
-    age = 0
-    height = 0
-    weight = 0
-    gender = ""
-    goal = ""
-    activity_level = ""
-    meals_left = 3
-    diabetic = False
-    calories_consumed = 0
-    allowed_diet = []
-    allergies = []
-
 def search_recipes(recipe_query_parameters):
     # passed in partial recipe parameters object
     if not recipe_query_parameters.ignore_user_preferences:
@@ -236,11 +220,8 @@ def search_recipes(recipe_query_parameters):
     return client.search(**return_dictionary)
 
 
-def django_query_to_parameter_object(post_data_dictionary, user_preferences):
+def django_query_to_parameter_object(post_data_dictionary, user):
     parameter_object = RecipeQueryParameters()
-
-    if len(post_data_dictionary['current_weight']):
-        parameter_object.weight = int(post_data_dictionary['current_weight'])
 
     if len(post_data_dictionary['in_ingredients']):
         parameter_object.allowed_ingredients = post_data_dictionary['in_ingredients'].split(',')
@@ -261,17 +242,21 @@ def django_query_to_parameter_object(post_data_dictionary, user_preferences):
         parameter_object.meaty_min_flavor = float(meatiness[0]) / 10.00
         parameter_object.meaty_max_flavor = float(meatiness[1]) / 10.00
 
-    if post_data_dictionary['ignore_user_preferences']:
+    if post_data_dictionary.has_key('ignore_user_preferences'):
         parameter_object.ignore_user_preferences = True
     else:
-        parameter_object.age = user_preferences.age
-        parameter_object.activity_level = user_preferences.activity_level
-        parameter_object.allowed_diet = user_preferences.allowed_diet
-        parameter_object.allergies = user_preferences.allergies
-        parameter_object.diabetic = user_preferences.diabetic
-        parameter_object.goal = user_preferences.goal
-        parameter_object.meals_left = user_preferences.meals_left
-        parameter_object.calories_consumed = user_preferences.calories_consumed
-        parameter_object.height = user_preferences.height
+        if len(post_data_dictionary['current_weight']):
+            parameter_object.weight = int(post_data_dictionary['current_weight'])
+
+        if len(post_data_dictionary['calories_consumed']):
+            parameter_object.weight = int(post_data_dictionary['calories_consumed'])
+
+        parameter_object.age = user.age
+        parameter_object.activity_level = user.activity_level.level
+        parameter_object.allowed_diet = user.yummlydiet
+        parameter_object.allergies = user.allergies.all()
+        parameter_object.diabetic = user.diabetic
+        parameter_object.goal = user.goal.goal
+        parameter_object.height = user.height
 
     return parameter_object

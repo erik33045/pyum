@@ -24,6 +24,7 @@ class ActivityLevel(models.Model):
     def __unicode__(self):
         return self.level
 
+
 class Goal(models.Model):
     goal = models.CharField(max_length=250)
 
@@ -34,11 +35,12 @@ class Goal(models.Model):
 class AppUser(models.Model):
     user = models.OneToOneField(User)
     yummlydiet = models.ForeignKey(YummlyDiet, default=1)
-    allergies = models.ManyToManyField(YummlyAllergy)
+    allergies = models.ManyToManyField(YummlyAllergy, blank=True)
     age = models.IntegerField()
     height = models.IntegerField()
     activity_level = models.ForeignKey(ActivityLevel, default=1)
     goal = models.ForeignKey(Goal, default=4)
+    diabetic = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.user.username

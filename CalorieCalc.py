@@ -4,7 +4,7 @@ class CalorieCalc:
     height = 0
     gender = ""
     goal = ""
-    activityLevel = ""
+    activity_level = ""
 
     def __init__(self, info):
         self.age = info.age
@@ -12,13 +12,12 @@ class CalorieCalc:
         self.height = info.height
         self.gender = info.gender
         self.goal = info.goal
-        self.activityLevel = info.activityLevel
+        self.activity_level = info.activity_level
 
     def get_bmi(self):
         bmi = ((self.weight * 703.0) / (self.height ** 2.0))
         bmi = round(bmi, 1)
         return bmi
-
 
     def get_bmr(self):
         if self.gender == "Female":
@@ -27,22 +26,21 @@ class CalorieCalc:
             bmr = 66 + (6.23 * self.weight) + (12.7 * self.height) - (6.8 * self.age)
         return bmr
 
-
     def get_calories(self):
         calories = 0
         bmr = self.get_bmr()
-        if self.activityLevel == "sedentary":
+        if self.activity_level == "sedentary":
             calories = bmr * 1.2
-        elif self.activityLevel == "lightly active":
+        elif self.activity_level == "lightly active":
             calories = bmr * 1.375
-        elif self.activityLevel == "moderately active":
+        elif self.activity_level == "moderately active":
             calories = bmr * 1.55
-        elif self.activityLevel == "very active":
+        elif self.activity_level == "very active":
             calories = bmr * 1.725
-        elif self.activityLevel == "extra active":
+        elif self.activity_level == "extra active":
             calories = bmr * 1.9
 
-        #lose 2 pounds per week
+        # lose 2 pounds per week
         if self.goal == "Lose 2":
             calories -= 1000
 
@@ -71,7 +69,7 @@ class CalorieCalc:
         calories = int(calories)
         return calories
 
-#testing functions
+# testing functions
 '''
 from YummlyDriver import RecipeQueryParameters
 p = RecipeQueryParameters()
