@@ -37,6 +37,8 @@ class AppUser(models.Model):
     allergies = models.ManyToManyField(YummlyAllergy)
     age = models.IntegerField()
     height = models.IntegerField()
+    activity_level = models.ForeignKey(ActivityLevel, default=1)
+    goal = models.ForeignKey(Goal, default=4)
 
     def __unicode__(self):
         return self.user.username
