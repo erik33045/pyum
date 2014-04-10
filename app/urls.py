@@ -12,5 +12,4 @@ urlpatterns = patterns('',
                        url(r'^login/$', views.user_login, name='login'),
                        url(r'^logout/$', views.user_logout, name='logout'),
                        url(r'^home/$', views.home, name='home'),
-                       url(r'^', views.home, name='home'),
                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve'), )
