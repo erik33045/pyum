@@ -15,5 +15,5 @@ class UserForm(forms.ModelForm):
 class AppUserForm(forms.ModelForm):
     class Meta:
         model = AppUser
-        fields = ('yummlydiet', 'allergies','age','height', 'activity_level', 'goal')
+        fields = ('yummlydiet', 'allergies','age', 'gender', 'height', 'activity_level', 'goal')
 

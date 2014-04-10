@@ -17,6 +17,11 @@ class YummlyAllergy(models.Model):
     def __unicode__(self):
         return self.shortDescription
 
+class Gender(models.Model):
+    gender = models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return self.gender
 
 class ActivityLevel(models.Model):
     level = models.CharField(max_length=250)
@@ -37,6 +42,7 @@ class AppUser(models.Model):
     yummlydiet = models.ForeignKey(YummlyDiet, default=1)
     allergies = models.ManyToManyField(YummlyAllergy, blank=True)
     age = models.IntegerField()
+    gender = models.ForeignKey(Gender, default=1)
     height = models.IntegerField()
     activity_level = models.ForeignKey(ActivityLevel, default=1)
     goal = models.ForeignKey(Goal, default=5)
