@@ -1,6 +1,6 @@
 How to migrate models in the database:
-1) manage.py schemamigration --auto
-2) manage.py migrate app
+1) python manage.py schemamigration app --auto
+2) python manage.py migrate app
 
 
 How to fix your broken project on windows:

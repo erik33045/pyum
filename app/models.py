@@ -21,6 +21,15 @@ class YummlyAllergy(models.Model):
 class ActivityLevel(models.Model):
     level = models.CharField(max_length=250)
 
+    def __unicode__(self):
+        return self.level
+
+class Goal(models.Model):
+    goal = models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return self.goal
+
 
 class AppUser(models.Model):
     user = models.OneToOneField(User)
