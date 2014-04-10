@@ -17,6 +17,7 @@ class YummlyAllergy(models.Model):
     def __unicode__(self):
         return self.shortDescription
 
+
 class ActivityLevel(models.Model):
     level = models.CharField(max_length=250)
 

@@ -31,50 +31,85 @@
     <div class="content_wrapper" style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto">
 
         <div id="div_search" class="content_wrapper" style="width: 310px; float: left">
-            <form id="form_search" action="/pyum/search_recipes/" method="POST" style="text-align:left;">
+            <form id="form_search" action="/pyum/search_recipes/" method="POST" style="text-align:right;">
                 {% csrf_token %}
-                Current weight: <input type="text" name="current_weight"><br>
-                Meals left in day:
-                <select id="num_meals">
+
+                <div>
+                    <label for="ignore_user_preferences" style="width: 150px; float:  left">Ignore User Preferences: </label>
+                    <input type="checkbox" id="ignore_user_preferences" name="ignore_user_preferences" onchange="ignoreUserPreferencesChecked(this)">
+                </div>
+
+                 <label for="current_weight">Current weight:
+                <input type="text" name="current_weight" id="current_weight">
+                </label>
+
+                <div>
+                <label for="num_meals" style="width: 101px; float:  left"> Meals left in day:</label><select id="num_meals">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
-                </select><br>
+                </select>
+                    </div>
 
                 <label for="in_ingredients">Including ingredients:
                     <input type="text" id="in_ingredients" name="in_ingredients">
-                </label><br>
+                </label>
                 <label for="ex_ingredients">Excluding ingredients:
                     <input type="text" id="ex_ingredients" name="ex_ingredients"/>
-                </label><br>
+                </label>
                 <label for="prep_time">Max prep time(minutes):
                     <input type="text" id="prep_time" name="prep_time">
-                </label><br>
+                </label>
 
-                <div class="slider">
-                    <p>
-                        <label for="amount-sweetness">Sweetness:</label>
-                        <input type="text" id="amount-sweetness" name="amount-sweetness" class="amount"
-                               style="border:0; color:#771201; font-weight:bold;">
-                    </p>
+                <div id="divSliders" style="text-align: left">
+                    <div class="slider">
+                        <p>
+                            <label for="amount-sweetness">Sweetness:</label>
+                            <input type="text" id="amount-sweetness" name="amount-sweetness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
 
-                    <div id="range-sweetness" class="slider-range"></div>
+                        <div id="range-sweetness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-meatiness">Meatiness:</label>
+                            <input type="text" id="amount-meatiness" name="amount-meatiness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+                        <div id="range-meatiness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-sourness">Sourness:</label>
+                            <input type="text" id="amount-sourness" name="amount-sourness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+                        <div id="range-sourness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-sweetness">Bitterness:</label>
+                            <input type="text" id="amount-bitterness" name="amount-bitterness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+
+                        <div id="range-bitterness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-spicyness">Spicyness:</label>
+                            <input type="text" id="amount-spicyness" name="amount-spicyness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+
+                        <div id="range-spicyness" class="slider-range"></div>
+                    </div>
                 </div>
-                <div class="slider">
-                    <p>
-                        <label for="amount-meatiness">Meatiness:</label>
-                        <input type="text" id="amount-meatiness" name="amount-meatiness" class="amount"
-                               style="border:0; color:#771201; font-weight:bold;">
-                    </p>
 
-                    <div id="range-meatiness" class="slider-range"></div>
-                </div>
-                Sourness:
-                Bitterness:
-                Spiciness:
                 <input type="submit" value="Submit">
             </form>
         </div>
@@ -103,7 +138,7 @@
             min: 0,
             max: 10,
             step: 1,
-            values: [ 0, 5 ],
+            values: [ 0, 10 ],
             slide: function( event, ui ) {
                 $( ".amount", $this ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
             }
@@ -111,6 +146,14 @@
         $( ".amount", $this).val($( ".slider-range", $this ).slider( "values", 0 ) +
                 " - " + $( ".slider-range", $this ).slider( "values", 1 ) );
     });
+
+    function ignoreUserPreferencesChecked(element){
+        var current_weight = $.find("#current_weight")[0];
+        current_weight.val("");
+        current_weight.disabled = element.checked;
+        current_weight.readOnly = element.checked;
+    }
+
 </script>
 
 </body>

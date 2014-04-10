@@ -6,6 +6,8 @@ from django_tables2 import RequestConfig
 
 import app.tables
 from app.forms import UserForm, AppUserForm
+from app.models import AppUser
+from django.contrib.auth.models import User
 import YummlyDriver
 
 
@@ -111,19 +113,26 @@ def user_login(request):
 def search_recipes(request):
     if request.user.is_authenticated():
         if request.method == "POST":
-            #pull parameters out of the post object
-            parameters = YummlyDriver.django_query_dictionary_to_parameter_object(request.POST)
-            #query for the matches
+            # pull parameters out of the post object
+            appUser = request.user.appuser
+
+            if not appUser.yummlydiet.searchValue == "None":
+                appUser.yummlydiet.searchValue
+
+            parameters = YummlyDriver.django_query_to_parameter_object(request.POST)
+            # query for the matches
             results = YummlyDriver.search_recipes(parameters).matches
-            #map to table data
-            table_data = app.tables.map_from_result_list(results)
-            table = app.tables.ResultTable(table_data)
-            RequestConfig(request).configure(table)
-            # noinspection PyUnresolvedReferences
-            #render the table
-            return render(request, 'recipes.html', {'table': table})
-        else:
+            #map to table data and store in session
+            request.session['results'] = YummlyDriver.search_recipes(parameters).matches
+
+        if not request.session.has_key('results'):
             return render(request, 'recipes.html', {'table': app.tables.ResultTable([])})
+
+        result_data = list(request.session['results'])
+        table_data = app.tables.map_from_result_list(result_data)
+        table = app.tables.ResultTable(table_data)
+        RequestConfig(request).configure(table)
+        return render(request, 'recipes.html', {'table': table})
     else:
         return render(request, 'app/login.html', {})
 
@@ -132,11 +141,6 @@ def search_recipes(request):
 def home(request):
     if request.user.is_authenticated():
         if request.method == "POST":
-            parameters = YummlyDriver.django_query_dictionary_to_parameter_object(request.POST)
-            #Need to put in the rest of the user parameters here if need be
-
-            print search_recipes(request, parameters)
-            #need to fire off the call to the recipes page
             return httpResponsRedirect('recipes.htm')
 
         return render(request, 'app/home.html', {})

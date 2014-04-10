@@ -16,16 +16,16 @@ class TableRow:
     prep_time = float(0)
 
     def __init__(self, search_result):
-        self.id = search_result.id
-        self.name = search_result.recipeName
+        self.id = search_result['id']
+        self.name = search_result['recipeName']
         self.link = ["http://www.yummly.com/recipe/" + self.id, self.name]
-        self.rating = search_result.rating
-        self.attributes = search_result.attributes
+        self.rating = search_result['rating']
+        self.attributes = search_result['attributes']
 
-        self.prep_time = search_result.totalTimeInSeconds
+        self.prep_time = search_result['totalTimeInSeconds']
 
-        if len(search_result.smallImageUrls) > 0:
-            self.image = search_result.smallImageUrls[0]
+        if len(search_result['smallImageUrls']) > 0:
+            self.image = search_result['smallImageUrls'][0]
 
         if self.attributes.has_key("course"):
             self.courses = ', '.join(str(x) for x in self.attributes["course"])
@@ -67,8 +67,10 @@ class ResultTable(tables.Table):
             return mark_safe('<img src="%s"/>' % escape(value))
 
     def render_link(self, value):
-        link = '<a href="{0}">{1}</a>'.format(escape(value[0]), escape(value[1]))
-        return mark_safe(link)
+        link = u'<a href="{0}">{1}</a>'.format(escape(value[0]), escape(value[1]))
+
+        x = link.encode("utf-8")
+        return mark_safe(x)
 
     def render_rating(self, value):
         return value
