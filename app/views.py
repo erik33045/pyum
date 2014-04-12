@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django_tables2 import RequestConfig
 
 import app.tables
-from app.forms import UserForm, UserFormWithoutLogin, AppUserForm
+from app.forms import UserForm, UserFormWithoutLogin, AppUserForm, RecipeSearchForm
 from app.models import AppUser
 from django.contrib.auth.models import User
 import YummlyDriver
@@ -57,24 +57,37 @@ def user_login(request):
         return render(request, 'app/login.html', {})
 
 
+def search_for_recipes(request):
+    # Create Parameter Query for Yummly API
+    parameters = YummlyDriver.django_query_to_parameter_object(request.POST, request.user.appuser)
+    # query for the matches
+    results = YummlyDriver.search_recipes(parameters).matches
+    #map to table data and store in session
+    request.session['results'] = results
+
+
+def bind_data_to_table(request):
+    result_data = list(request.session['results'])
+    table_data = app.tables.map_from_result_list(result_data)
+    table = app.tables.ResultTable(table_data)
+    RequestConfig(request).configure(table)
+    return table
+
+
 def search_recipes(request):
     if request.user.is_authenticated():
         if request.method == "POST":
-            #Create Parameter Query for Yummly API
-            parameters = YummlyDriver.django_query_to_parameter_object(request.POST, request.user.appuser)
-            # query for the matches
-            results = YummlyDriver.search_recipes(parameters).matches
-            #map to table data and store in session
-            request.session['results'] = results
+            search_for_recipes(request)
 
+        search_form = RecipeSearchForm(initial=request.GET)
+
+        table = []
         if not request.session.has_key('results'):
-            return render(request, 'recipes.html', {'table': app.tables.ResultTable([])})
+            table = app.tables.ResultTable([])
+        else:
+            table = bind_data_to_table(request)
 
-        result_data = list(request.session['results'])
-        table_data = app.tables.map_from_result_list(result_data)
-        table = app.tables.ResultTable(table_data)
-        RequestConfig(request).configure(table)
-        return render(request, 'recipes.html', {'table': table})
+        return render(request, 'recipes.html', {'table': table, 'search_form': search_form})
     else:
         return render(request, 'app/login.html', {})
 

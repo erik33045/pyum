@@ -25,3 +25,12 @@ class AppUserForm(forms.ModelForm):
         model = AppUser
         fields = ('yummlydiet', 'allergies', 'age', 'gender', 'height', 'diabetic', 'activity_level', 'goal')
 
+
+class RecipeSearchForm(forms.Form):
+    ignore_user_preferences = forms.BooleanField()
+    current_weight = forms.IntegerField()
+    calories_consumed = forms.IntegerField()
+    num_meals = forms.ChoiceField(choices=[(x, x) for x in range(1, 6)])
+    in_ingredients = forms.CharField()
+    ex_ingredients = forms.CharField()
+    prep_time = forms.IntegerField()

@@ -251,6 +251,8 @@ def django_query_to_parameter_object(post_data_dictionary, user):
         if len(post_data_dictionary['calories_consumed']):
             parameter_object.weight = int(post_data_dictionary['calories_consumed'])
 
+        parameter_object.meals_left = int(post_data_dictionary['num_meals'])
+
         parameter_object.age = user.age
         parameter_object.gender = user.gender
         parameter_object.activity_level = user.activity_level.level

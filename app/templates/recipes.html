@@ -1,6 +1,3 @@
-
-
-
 <!doctype html>
 <html>
 
@@ -36,45 +33,29 @@
 <div id="templatemo_main" style="background-color: #771201; min-height: 330px">
     <div class="content_wrapper" style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto">
 
-        <div id="div_search" class="content_wrapper" style="width: 325px; float: left; border: 1px solid black; padding: 5px 10px 10px 10px">
-            <form id="form_search" action="/pyum/search_recipes/" method="POST" style="text-align:right; ">
+        <div id="div_search" class="content_wrapper" style="width: 215px; float: left; border: 1px solid black; padding: 5px 10px 10px 10px">
+            <form id="form_search" action="/pyum/search_recipes/" method="POST"  enctype="multipart/form-data">
                 {% csrf_token %}
+                <label for="id_ignore_user_preference">Ignore User Preferences:</label>
+                {{ search_form.ignore_user_preferences }}
 
-                <div>
-                    <label for="ignore_user_preferences" style="width: 163px; float:  left">Ignore User Preferences: </label>
-                    <input type="checkbox" id="ignore_user_preferences" name="ignore_user_preferences" onchange="ignoreUserPreferencesChecked(this)">
+                <div id="divUserPreferences">
+                    <label for="id_calories_consumed">Calories Consumed:</label>
+                    {{ search_form.calories_consumed }}
+                    <label for="id_current_weight">Current Weight:</label>
+                    {{ search_form.current_weight}}
+                    <label for="id_num_meals">Meals Left in the Day:</label>
+                    {{ search_form.num_meals }}
                 </div>
 
-                <div id="userPreferencesDiv">
-                    <label for="current_weight">Current weight:
-                    <input type="text" name="current_weight" id="current_weight" type="number">
-                    </label>
+                <label for="id_in_ingredients">Included Ingredients:</label>
+                {{ search_form.in_ingredients }}
 
-                    <label for="calories_consumed">Calories Consumed:
-                        <input type="text" name="calories_consumed" id="calories_consumed">
-                    </label>
+                <label for="id_ex_ingredients">Excluded Ingredients:</label>
+                {{ search_form.ex_ingredients }}
 
-                    <div>
-                    <label for="num_meals" style="width: 163px; float:  left"> Meals left in day:</label><select id="num_meals">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-                        </div>
-                </div>
-
-                <label for="in_ingredients">Including ingredients:
-                    <input type="text" id="in_ingredients" name="in_ingredients" required>
-                </label>
-                <label for="ex_ingredients">Excluding ingredients:
-                    <input type="text" id="ex_ingredients" name="ex_ingredients"/>
-                </label>
-                <label for="prep_time">Max prep time(minutes):
-                    <input type="text" id="prep_time" name="prep_time">
-                </label>
+                <label for="id_prep_time">Preparation Time (in minutes):</label>
+                {{ search_form.prep_time }}
 
                 <div id="divSliders" style="text-align: left">
                     <div class="slider">
@@ -121,7 +102,6 @@
                         <div id="range-spicyness" class="slider-range"></div>
                     </div>
                 </div>
-
                 <input type="submit" value="Submit">
             </form>
         </div>
@@ -143,6 +123,37 @@
         src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.slider.js" %}'></script>
 <script type='text/javascript' src='{% static "app/js/jquery.validate.js" %}' ></script>
 <script type="text/javascript">
+    $("#form_search").validate({
+        rules: {
+            current_weight: {
+                number: true,
+                required: true
+            },
+            calories_consumed: {
+                number: true,
+                required: true
+            },
+            prep_time: {
+                number: true
+            },
+            in_ingredients:{
+                required: true
+            }
+        }
+    });
+
+    $("#id_ignore_user_preferences").change(function() {
+        var div = $("#divUserPreferences");
+        $("#id_current_weight").val("");
+        $("#id_calories_consumed").val("");
+        if($("#id_ignore_user_preferences").is(':checked')){
+            div.hide();
+        }else{
+            div.show();
+        }
+
+
+    });
 
     $(".slider").each(function() {
         var $this = $(this);
@@ -158,46 +169,6 @@
         });
         $( ".amount", $this).val($( ".slider-range", $this ).slider( "values", 0 ) +
                 " - " + $( ".slider-range", $this ).slider( "values", 1 ) );
-    });
-
-    function ignoreUserPreferencesChecked(element){
-        $("#current_weight").val("");
-        $("#calories_consumed").val("");
-
-        if(element.checked){
-            $("#userPreferencesDiv").hide();
-        }
-        else{
-            $("#userPreferencesDiv").show();
-        }
-    }
-
-    function NumericTextOnly(evt) {
-        var theEvent = evt || window.event;
-        var key = theEvent.keyCode || theEvent.which;
-        key = String.fromCharCode( key );
-        var regex;
-        regex = /[0-9]|\./;
-        if( !regex.test(key) ) {
-            theEvent.returnValue = false;
-            if(theEvent.preventDefault) theEvent.preventDefault();
-        }
-    }
-
-    $("#form_search").validate({
-        rules: {
-            current_weight: {
-                required: true,
-                number: true
-            },
-            calories_consumed: {
-                required: true,
-                number: true
-            },
-            prep_time: {
-                number: true
-            }
-        }
     });
 
 </script>
