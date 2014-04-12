@@ -47,7 +47,7 @@
 
                 <div id="userPreferencesDiv">
                     <label for="current_weight">Current weight:
-                    <input type="text" name="current_weight" id="current_weight">
+                    <input type="text" name="current_weight" id="current_weight" type="number">
                     </label>
 
                     <label for="calories_consumed">Calories Consumed:
@@ -67,7 +67,7 @@
                 </div>
 
                 <label for="in_ingredients">Including ingredients:
-                    <input type="text" id="in_ingredients" name="in_ingredients">
+                    <input type="text" id="in_ingredients" name="in_ingredients" required>
                 </label>
                 <label for="ex_ingredients">Excluding ingredients:
                     <input type="text" id="ex_ingredients" name="ex_ingredients"/>
@@ -141,8 +141,9 @@
         src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.mouse.js" %}'></script>
 <script type='text/javascript'
         src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.slider.js" %}'></script>
+<script type='text/javascript' src='{% static "app/js/jquery.validate.js" %}' ></script>
 <script type="text/javascript">
-    //Functionality for slider
+
     $(".slider").each(function() {
         var $this = $(this);
         $( ".slider-range", $this).slider({
@@ -169,8 +170,35 @@
         else{
             $("#userPreferencesDiv").show();
         }
-
     }
+
+    function NumericTextOnly(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode( key );
+        var regex;
+        regex = /[0-9]|\./;
+        if( !regex.test(key) ) {
+            theEvent.returnValue = false;
+            if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    $("#form_search").validate({
+        rules: {
+            current_weight: {
+                required: true,
+                number: true
+            },
+            calories_consumed: {
+                required: true,
+                number: true
+            },
+            prep_time: {
+                number: true
+            }
+        }
+    });
 
 </script>
 
