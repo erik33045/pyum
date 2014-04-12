@@ -7,6 +7,23 @@
             list-style-type: none;
         }
 
+        .top_banner{
+            background: linear-gradient(#771201,black);
+            margin-top: 10px;
+            padding-top: 10px;
+            height: 100px;
+        }
+
+        h1.top_banner{
+            color: white;
+            font-weight: 400;
+            padding: 30px;
+            font-family: Verdana, Geneva, sans-serif;
+            margin-left: 50px;
+            margin: 10px auto;
+            text-align: left
+        }
+
         li {
             display: inline;
         }
@@ -16,6 +33,9 @@
     <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
 </head>
 <body>
+<div id="pyum_head" class = "top_banner">
+            <h1 class = "top_banner" style="margin-top: 10px">Pyum</h1>
+    </div>
 <div id="templatemo_main" style="background-color: #771201;">
     <div class="content_wrapper"
          style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto; border: solid 1px black; min-width: 500px">
