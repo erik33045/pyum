@@ -35,6 +35,18 @@
     </div>
     <div class="clear"></div>
 </div>
+<script type="text/javascript" src='{% static "app/js/jquery-1.3.2.min.js" %}'></script>
+<script type = 'text/javascript' src='{% static "app/js/jquery.validate.js" %}'></script>
+<script type = 'text/javascript'>
+    $("#user_form").validate({
+    rules: {
+        age: {
+            required: true,
+            number: true
+        }
+    }
+    });
+</script>
 </body>
 {% endblock %}
 </html>

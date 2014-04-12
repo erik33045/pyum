@@ -89,6 +89,7 @@ def home(request):
     else:
         return render(request, 'app/login.html', {})
 
+
 def user_logout(request):
     logout(request)
     return render(request, 'app/login.html', {})
