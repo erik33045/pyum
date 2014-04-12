@@ -22,5 +22,5 @@ class UserFormWithoutLogin(forms.ModelForm):
 class AppUserForm(forms.ModelForm):
     class Meta:
         model = AppUser
-        fields = ('yummlydiet', 'allergies','age', 'gender', 'height', 'activity_level', 'goal')
+        fields = ('yummlydiet', 'allergies', 'age', 'gender', 'height', 'diabetic', 'activity_level', 'goal')
 
