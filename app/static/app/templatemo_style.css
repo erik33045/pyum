@@ -281,9 +281,22 @@ ul.list_bullet li a:hover {
 }
 
 #templatemo_header {
-    height: 95px;
+    background: linear-gradient(#771201,black);
+    margin-top: 10px;
+    padding-top: 10px;
+    height: 100px;
     margin-bottom: 30px;
 }
+
+h1.templatemo_header{
+            color: white;
+            font-weight: 400;
+            padding: 30px;
+            font-family: Verdana, Geneva, sans-serif;
+            margin-left: 50px;
+            margin: 10px auto;
+            text-align: left
+        }
 
 #templatemo_slider {
     clear: both;
@@ -315,6 +328,7 @@ ul.list_bullet li a:hover {
     width: 900px;
     margin: 0 auto;
     padding: 40px;
+    float bottom
     background: url(images/templatemo_footer.jpg) center top no-repeat
 }
 
