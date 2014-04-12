@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <!--suppress HtmlUnknownTarget -->
 <html>
 
@@ -16,7 +15,7 @@
 <div id="templatemo_main" style="background-color: #771201;">
     <div class="content_wrapper" style="background-color: #FFFFFF; width: 50%; margin-left: auto; margin-right: auto">
         <h1 style="margin-top: 10px">Your Profile</h1>
-            <form id="user_form" method="post" action="/app/save_profile/"
+            <form id="user_form" method="post" action="/app/profile/"
                   enctype="multipart/form-data">
 
                 {% csrf_token %}
@@ -26,7 +25,7 @@
                      making everything look neater. -->
                 {{ user_form.as_p }}
                 <label for = "password_confirm">Confirm Password: </label>
-                <input type = "password" id="password_confirm"/>
+                <input type = "password" id="password_confirm" name="password_confirm"/>
                 {{ profile_form.as_p }}
 
                 <!-- Provide a button to click to submit the form. -->
@@ -38,6 +37,15 @@
 <script type="text/javascript" src='{% static "app/js/jquery-1.3.2.min.js" %}'></script>
 <script type = 'text/javascript' src='{% static "app/js/jquery.validate.js" %}'></script>
 <script type = 'text/javascript'>
+    jQuery.validator.addMethod("password_check",
+            function(value, element) {
+                var password = $("#id_password").val();
+                var confirmPassword = $("#password_confirm").val();
+                console.log(password, "    ", confirmPassword);
+                return  (password === "" && confirmPassword === "") || password === confirmPassword;
+            },
+            "passwords do not match");
+
     $("#user_form").validate({
     rules: {
         age: {
@@ -51,10 +59,14 @@
         email: {
             required: true,
             email: true
+        },
+        password:{
+            password_check: true
+        },
+        password_confirm:{
+            password_check: true
         }
-
-    }
-    });
+    }});
 </script>
 </body>
 {% endblock %}

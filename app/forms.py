@@ -19,6 +19,7 @@ class UserFormWithoutLogin(forms.ModelForm):
         model = User
         fields = ('email', 'password')
 
+
 class AppUserForm(forms.ModelForm):
     class Meta:
         model = AppUser

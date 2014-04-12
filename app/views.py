@@ -95,6 +95,39 @@ def user_logout(request):
     return render(request, 'app/login.html', {})
 
 
+def save_user(request):
+    post_data = request.POST
+    if request.POST['password'] == "":
+        post_data['password'] = request.user.password
+
+    user_form = UserFormWithoutLogin(data=post_data, instance=User.objects.get(pk=request.user.id))
+    profile_form = AppUserForm(data=post_data, instance=AppUser.objects.get(pk=request.user.appuser.id))
+
+    if user_form.is_valid() and profile_form.is_valid():
+        user = user_form.save()
+        user.set_password(user.password)
+        user.save()
+        profile = profile_form.save()
+        profile.save()
+    return profile_form, user_form
+
+
+def get_data_for_user(request):
+    initial_user_data = {'email': request.user.email}
+    initial_app_user_data = {
+        'yummlydiet': request.user.appuser.yummlydiet,
+        'allergies': request.user.appuser.allergies.all(),
+        'age': request.user.appuser.age,
+        'gender': request.user.appuser.gender,
+        'height': request.user.appuser.height,
+        'diabetic': request.user.appuser.diabetic,
+        'activity_level': request.user.appuser.activity_level,
+        'goal': request.user.appuser.goal}
+    user_form = UserFormWithoutLogin(initial=initial_user_data)
+    profile_form = AppUserForm(initial=initial_app_user_data)
+    return profile_form, user_form
+
+
 def profile(request):
     if not request.user.is_authenticated():
         return render(request, 'app/login.html', {})
@@ -102,10 +135,12 @@ def profile(request):
     user_form = UserFormWithoutLogin()
     profile_form = AppUserForm()
 
+    if request.method == 'POST':
+        profile_form, user_form = save_user(request)
+    else:
+        profile_form, user_form = get_data_for_user(request)
+
     return render(request, 'app/profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
-
-def save_profile(request):
-    print "I saved!"
