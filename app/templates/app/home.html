@@ -8,7 +8,7 @@
 
     <title>Pyum</title>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
+    <link rel="stylesheet" type="text/css" href='{% static "app/templatemo_style.css" %}'>
     <style type="text/css">
         #div_main{
         background-color: #FFFFFF;
@@ -25,6 +25,28 @@
         align: left;
         }
 
+        .button{
+        width: 150px;
+        float: left;
+        padding-left: 10px;
+        height: 150px;
+        background-repeat: no-repeat;
+        padding-top: 115px;
+        border-radius: 15px;
+        text-align: bottom;
+        font: bold 16px Arial;
+        display: inline-block;
+        }
+        #button_find_meal{
+        background: url('{% static "app/images/pyum_imgs/rss.JPG" %}');
+        float: left;
+        }
+
+         #button_profile{
+        background: url('{% static "app/images/pyum_imgs/rss.JPG" %}');
+        float: left;
+        }
+
     </style>
 </head>
 
@@ -35,7 +57,9 @@
         <h1 style="margin-right: auto; margin-left: auto; margin-top: 10px; text-align: center">Home</h1>
 
         <div id="button">
-            <input id="button_find_meal" type="button" value="Find Me A Meal" onclick="window.location='/app/search_recipes';"/>
+            <input id="button_find_meal" class = "button" type="button" value="Find Me A Meal" onclick="window.location='/app/search_recipes';"/>
+            <input id="button_profile" class = "button" type="button" value="My Profile" onclick="window.location='/app/profile';"/>
+
         </div>
     </div>
 
