@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-{% extends "header.html" %}
-{% block title %}profile{% endblock %}
-{% block content %}
+<!--suppress HtmlUnknownTarget -->
 <html>
-<head>
-    <title></title>
-</head>
-<body>
 
+{% extends "header.html" %}
+{% block title %}Pyum{% endblock %}
+{% block content %}
+    <head>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "app/templatemo_style.css" %}'>
+        <title>Pyum</title>
+    </head>
+    <body>
+
+
+<div id="templatemo_main" style="background-color: #771201;">
+    <div class="content_wrapper" style="background-color: #FFFFFF; width: 50%; margin-left: auto; margin-right: auto">
+        <h1 style="margin-top: 10px">Your Profile</h1>
+            <form id="user_form" method="post" action="/app/save_profile/"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <!-- Display each form. The as_p method wraps each element in a paragraph
+                     (<p>) element. This ensures each element appears on a new line,
+                     making everything look neater. -->
+                {{ user_form.as_p }}
+                <label for = "password_confirm">Confirm Password: </label>
+                <input type = "password" id="password_confirm"/>
+                {{ profile_form.as_p }}
+
+                <!-- Provide a button to click to submit the form. -->
+                <input type="submit" name="submit" value="Save"/>
+            </form>
+    </div>
+    <div class="clear"></div>
+</div>
 </body>
+{% endblock %}
 </html>

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django_tables2 import RequestConfig
 
 import app.tables
-from app.forms import UserForm, AppUserForm
+from app.forms import UserForm, UserFormWithoutLogin, AppUserForm
 from app.models import AppUser
 from django.contrib.auth.models import User
 import YummlyDriver
@@ -149,16 +149,16 @@ def user_logout(request):
 
 
 def profile(request):
-    if request.method == 'POST': # If the form has been submitted...
-        # ContactForm was defined in the the previous section
-        form = ProfileForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            # ...
-            return HttpResponseRedirect('/thanks/') # Redirect after POST
-    else:
-        form = ProfileForm() # An unbound form
+    if not request.user.is_authenticated():
+        return render(request, 'app/login.html', {})
 
-    return render(request, 'profile.html', {
-        'form': form,
+    user_form = UserFormWithoutLogin()
+    profile_form = AppUserForm()
+
+    return render(request, 'app/profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
     })
+
+def save_profile(request):
+    print "I saved!"

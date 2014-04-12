@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 <div id="templatemo_main" style="background-color: #771201; height: 400px">
     <div class="content_wrapper" style="background-color: #FFFFFF; width: 50%; margin-left: auto; margin-right: auto">
         <h1 style="">Login to Pyum</h1>
@@ -44,6 +43,21 @@
     </div>
     <div class="clear"></div>
 </div>
+
+<script type="text/javascript" src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-1.1-.2.js" %}'></script>
+<script type = 'text/javascript' src='{% static "app/js/jquery.validate.js" %}'></script>
+<script type = 'text/javascript'>
+    $("#user_form").validate();
+    $("#profile_form").validate)=(
+    {
+        rules: {
+            age:{
+                required: true,
+                number: true
+            }
+        }
+    });
+</script>
 </body>
 {% endblock %}
 </html>
