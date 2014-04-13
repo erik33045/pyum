@@ -9,15 +9,19 @@ body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
     line-height: 18px;
-    background-color: #771201;
+    background-color: white;
+    background-image: url(images/templatemo_body.jpg);
+    background-repeat: repeat-x;
+    background-position: top;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: #95200c;
     font-weight: 400;
     padding: 0;
-    margin: 0 0 10px 0;
     font-family: Verdana, Geneva, sans-serif;
+    margin: 10px auto;
+    text-align: center
 }
 
 h1 {
@@ -204,7 +208,8 @@ ul.list_bullet li a:hover {
 
 .content_wrapper {
     overflow: hidden;
-    width: 100%
+    width: 100%;
+    border: 1px solid #000000;
 }
 
 .content_mb_30 {
@@ -277,9 +282,23 @@ ul.list_bullet li a:hover {
 }
 
 #templatemo_header {
-    height: 95px;
-    margin-bottom: 30px;
+    background: linear-gradient(#771201,black);
+    margin-top: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 100px;
+    margin-bottom: 10px
 }
+
+h1.templatemo_header{
+            color: white;
+            font-weight: 400;
+            padding: 30px;
+            font-family: Verdana, Geneva, sans-serif;
+            margin-left: 50px;
+            margin: 10px auto;
+            text-align: left
+        }
 
 #templatemo_slider {
     clear: both;
@@ -296,7 +315,7 @@ ul.list_bullet li a:hover {
     clear: both;
     margin: 0;
     padding: 30px 40px;
-    background: #ffffff
+    background: #ffffff;
 }
 
 #templatemo_content {
@@ -494,7 +513,6 @@ ul.latest_work_home li img {
     color: #ccc;
     width: 266px;
     line-height: 1.2em;
-    background: url(images/caption_background.png) repeat;
 }
 
 #gallery li span h4 {
@@ -527,7 +545,6 @@ ul.latest_work_home li img {
     clear: both;
     margin: 0 0 40px 0;
     padding: 0 0 40px 0;
-    background: url(images/templatemo_hr_divider.png) repeat-x bottom
 }
 
 .post h2 {
@@ -757,4 +774,8 @@ ul.rc_comment li span {
     background: #771201;
     border: 1px solid #5f0e00;
     color: #fff
+}
+
+.error{
+    color: red;
 }
