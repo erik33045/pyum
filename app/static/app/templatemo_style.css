@@ -208,7 +208,8 @@ ul.list_bullet li a:hover {
 
 .content_wrapper {
     overflow: hidden;
-    width: 100%
+    width: 100%;
+    border: 1px solid #000000;
 }
 
 .content_mb_30 {

@@ -56,9 +56,9 @@ class ResultTable(tables.Table):
 
     # Meta properties, or properties relating to the table itself not the data
     class Meta:
-        attrs = {"class": "paleblue"}
+        attrs = {"class": "paleblue", 'min-width': '582px'}
 
-    # Don't fuck with this, I don't know exactly what it does
+    # Don't screw with this, I don't know exactly what it does
     def __init__(self, *args, **kwargs):
         super(ResultTable, self).__init__(*args, **kwargs)
 

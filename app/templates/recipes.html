@@ -13,27 +13,14 @@
     <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
     <link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css" %}'>
     <link rel="stylesheet" href='{% static "app/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" %}'>
-    <style type="text/css">
-        #slider-range{
-            background: #771201;
-        }
-        .ui-slider-handle{
-        }
-        .ui-slider{
-            width: 50%;
-            table-layout: auto;
-            margin: auto auto auto 0;
-            background: #771201;
-            align: left;
-        }
-    </style>
+    <link rel="stylesheet" href='{% static "app/css/pyum.css" %}'>
 </head>
 
 <body>
 <div id="templatemo_main" style="background-color: #771201; min-height: 330px">
-    <div class="content_wrapper" style="background-color: #FFFFFF; width: 90%; margin-left: auto; margin-right: auto">
-
-        <div id="div_search" class="content_wrapper" style="width: 215px; float: left; border: 1px solid black; padding: 5px 10px 10px 10px">
+    <div class="content_wrapper" style="background-color: #771201; min-width: 750px; border: none">
+        <div id="div_search" class="content_wrapper" style="background-color: #FFFFFF; width: 25%; min-width: 215px; float: left; border: 1px solid black; padding: 5px 10px 10px 10px">
+            <input id="hide_search" type="button" value="Hide" onclick="changeSearchFormVisibility();" />
             <form id="form_search" action="/pyum/search_recipes/" method="POST"  enctype="multipart/form-data">
                 {% csrf_token %}
                 <label for="id_ignore_user_preference">Ignore User Preferences:</label>
@@ -105,23 +92,23 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
-        <div id="table" style="float: left; width: 790px">
+
+        <div style="width: 68%; float: left">
+            <div id="table" style="float: left; min-width: 582px; width: 100%; background-color: #FFFFFF;">
             {% render_table table %}
+            </div>
         </div>
     </div>
 </div>
 
 <script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" %}'></script>
 <script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js" %}'></script>
-<script type='text/javascript'
-        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.core.js" %}'></script>
-<script type='text/javascript'
-        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.widget.js" %}'></script>
-<script type='text/javascript'
-        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.mouse.js" %}'></script>
-<script type='text/javascript'
-        src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.slider.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.core.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.widget.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.mouse.js" %}'></script>
+<script type='text/javascript' src='{% static "app/jquery-ui-1.10.4.custom/development-bundle/ui/jquery.ui.slider.js" %}'></script>
 <script type='text/javascript' src='{% static "app/js/jquery.validate.js" %}' ></script>
+
 <script type="text/javascript">
     $("#form_search").validate({
         rules: {
@@ -141,6 +128,25 @@
             }
         }
     });
+
+    function changeSearchFormVisibility(){
+        var button = $("#hide_search");
+        var div_search = $('#div_search');
+        if(button.val() == "Hide"){
+            $("#form_search").hide();
+            $("#div_search")
+            button.val("Show");
+            div_search.css('min-width', "55px");
+            div_search.css('width', "55px");
+        }
+        else{
+            $("#form_search").show();
+            button.val("Hide");
+            div_search.css('min-width', "215px");
+            div_search.css('width', "25%");
+        }
+
+    }
 
     $("#id_ignore_user_preferences").change(function() {
         var div = $("#divUserPreferences");
