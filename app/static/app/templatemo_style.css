@@ -329,7 +329,6 @@ h1.templatemo_header{
     width: 900px;
     margin: 0 auto;
     padding: 40px;
-    float bottom
     background: url(images/templatemo_footer.jpg) center top no-repeat
 }
 
@@ -513,7 +512,6 @@ ul.latest_work_home li img {
     color: #ccc;
     width: 266px;
     line-height: 1.2em;
-    background: url(images/caption_background.png) repeat;
 }
 
 #gallery li span h4 {
@@ -546,7 +544,6 @@ ul.latest_work_home li img {
     clear: both;
     margin: 0 0 40px 0;
     padding: 0 0 40px 0;
-    background: url(images/templatemo_hr_divider.png) repeat-x bottom
 }
 
 .post h2 {
@@ -776,4 +773,8 @@ ul.rc_comment li span {
     background: #771201;
     border: 1px solid #5f0e00;
     color: #fff
+}
+
+.error{
+    color: red;
 }
