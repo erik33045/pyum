@@ -5,11 +5,11 @@ Credit: http://www.templatemo.com/
 body {
     margin: 0;
     padding: 0 0 20px;
-    color: #666;
+    color: #771201;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
     line-height: 18px;
-    background-color: white;
+    background-color:#771201;
     background-image: url(images/templatemo_body.jpg);
     background-repeat: repeat-x;
     background-position: top;
@@ -92,7 +92,7 @@ img {
 
 .img_border {
     border: 1px solid #ccc;
-    background: #fff;
+    background: #ffffff;
 }
 
 .img_border_s {
@@ -201,7 +201,7 @@ ul.list_bullet li a {
 }
 
 ul.list_bullet li a:hover {
-    color: #797979
+    color: #ffffff;
 }
 
 /** Columns **/
@@ -209,7 +209,9 @@ ul.list_bullet li a:hover {
 .content_wrapper {
     overflow: hidden;
     width: 100%;
-    border: 1px solid #000000;
+    border: 1px solid #771201;
+    border: #771201;
+    margin: 0 auto;
 }
 
 .content_mb_30 {
@@ -283,11 +285,12 @@ ul.list_bullet li a:hover {
 
 #templatemo_header {
     background: linear-gradient(#771201,black);
-    margin-top: 10px;
+    overflow: hidden;
+    margin-top: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
-    height: 100px;
-    margin-bottom: 10px
+    height: 125px;
+    margin-bottom: 0px
 }
 
 h1.templatemo_header{
@@ -306,16 +309,21 @@ h1.templatemo_header{
 }
 
 #templatemo_menu {
-    width: 980px;
+    overflow: hidden;
+    width: 400px;
     height: 40px;
-    background: url(images/templatemo_menu.jpg)
+    background: blue;
+    background: url(images/templatemo_menu.jpg);
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 #templatemo_main {
     clear: both;
     margin: 0;
-    padding: 30px 40px;
-    background: #ffffff;
+    background-color: #771201;
+
 }
 
 #templatemo_content {
@@ -778,4 +786,41 @@ ul.rc_comment li span {
 
 .error{
     color: red;
+}
+
+#slider-range{
+    background: #771201;
+}
+
+.ui-slider-handle{
+}
+
+.ui-slider{
+    width: 50%;
+    table-layout: auto;
+    margin: auto auto auto 0;
+    background: #771201;
+    align: left;
+}
+
+#input_form{
+   background-color: white;
+   border-radius: 15px;
+   align: center;
+   margin: 0 auto;
+   margin-top: 30px;
+   padding: 10px;
+}
+.input_form{
+   background: linear-gradient(grey,white);
+   border-radius: 15px
+   padding: 30px
+}
+.menu{
+    background: linear-gradient(grey,white);
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid #771201;
+    border: #771201;
+    margin: 0 auto;
 }

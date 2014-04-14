@@ -7,15 +7,15 @@
 {% block content %}
     <head>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static "app/templatemo_style.css" %}">
-        <link rel="stylesheet" href='{% static "app/css/pyum.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "app/templatemo_style.css" %}'>
         <title>Pyum</title>
     </head>
     <body>
 
 
-<div id="templatemo_main" style="background-color: #771201;">
+<div id="templatemo_main" style="">
     <div class="content_wrapper" style="min-width: 640px">
+        <div id = "input_form" style ="width: 650px; min-width: 640px">
         <h1 style="margin-top: 10px">Register with Pyum</h1>
 
 
@@ -37,6 +37,7 @@
                 <input type="submit" name="submit" value="Register"/>
             </form>
         {% endif %}
+        </div>
     </div>
     <div class="clear"></div>
 </div>
