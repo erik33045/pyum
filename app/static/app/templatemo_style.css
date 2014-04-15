@@ -284,7 +284,7 @@ ul.list_bullet li a:hover {
 }
 
 #templatemo_header {
-    background: linear-gradient(#771201,black);
+    background: linear-gradient(#771201 60%,black);
     overflow: hidden;
     margin-top: 0px;
     padding-top: 0px;

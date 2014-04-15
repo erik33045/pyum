@@ -15,11 +15,9 @@
         h1.top_banner{
             color: white;
             font-weight: 400;
-            padding: 50px;
             font-family: Verdana, Geneva, sans-serif;
-            margin-left: 10px;
-            margin: 10px auto;
-            text-align: left
+            margin: 0 auto;
+            align: center;
         }
 
         li {
@@ -32,7 +30,8 @@
 </head>
 <body>
 <div id="templatemo_header" >
-            <h1 class = "top_banner" style="margin-top: 10px">Pyum</h1>
+           <img src='{% static "app/images/pyum_imgs/pyum_round_w.png" %}' style = "float: left; width:100px; margin-left: 35px; margin-top:10px"/>
+           <h1 class = "top_banner" style="margin: 30px; float: left;">Pyum</h1>
 </div>
 <div id="templatemo_main" >
     <div class="menu">
@@ -55,5 +54,6 @@
 <div id="content">
     {% block content %}{% endblock %}
 </div>
+
 </body>
 </html>

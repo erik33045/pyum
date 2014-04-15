@@ -6,7 +6,7 @@
 {% block content %}
     <head>
 
-    <title>Pyum</title>
+    <title>Pyum Home</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href='{% static "app/templatemo_style.css" %}'>
     <style type="text/css">
@@ -14,49 +14,54 @@
         .button{
         width: 150px;
         float: left;
-        padding: 10px;
         height: 150px;
         background-repeat: no-repeat;
-        padding-top: 115px;
         border-radius: 15px;
         text-align: bottom;
         font: bold 16px Arial;
+        color: white;
         display: inline-block;
         background-size: 150px;
         margin-top: 30px;
         margin-bottom:30px;
-        background-color: white;
+        background: linear-gradient(#771201 60%, black);
+        background-color: #771201;
 
         }
 
         #button_find_meal{
-        background: url('{% static "app/images/pyum_imgs/rss.JPG" %}');
         float: left;
         background-repeat: no-repeat;
-        background-color: white;
-        background-size: 150px;
+        background-size: 150px
         }
 
         #button_profile{
-        background: url('{% static "app/images/pyum_imgs/Smiley.jpg" %}');
         float: right;
         background-repeat: no-repeat;
         background-size: 150px;
-        background-color: white;
         }
 
     </style>
 </head>
 
 <body>
-<div class="templatemo_main" style="background-color:  #771201;">
-    <div style="background-color:  #771201; width: 400px; margin: 0 auto">
+<div id ="templatemo_main" style="background-color: #771201;">
+    <div class = "content_wrapper">
+        <div id ="input_form" style="width: 600px; padding: 35px">
+            <div style="width: 400px; margin: 0 auto">
+                <button id="button_find_meal" class = "button" type="button" value="Find Me A Meal" onclick="window.location='/app/search_recipes';">
+                    <img src ='{% static "app/images/pyum_imgs/tray_white.png" %}' style = "width: 115px"/>
+                    Find Me a Meal
+                </button>
+                <button id="button_profile" class = "button" type="button" value="My Profile" onclick="window.location='/app/profile';">
+                    <img src ='{% static "app/images/pyum_imgs/Measure_white.png" %}' style = "width: 115px"/>
+                    My Profile
+                </button>
+            </div>
         <div>
-            <input id="button_find_meal" class = "button" type="button" value="Find Me A Meal" onclick="window.location='/app/search_recipes';"/>
-            <input id="button_profile" class = "button" type="button" value="My Profile" onclick="window.location='/app/profile';"/>
-        </div>
-    <div>
-    <div class="clear"></div>
+
+        <div class="clear"></div>
+    </div>
 </div>
 
 </body>
