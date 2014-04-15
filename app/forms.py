@@ -24,10 +24,10 @@ class AppUserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AppUserForm, self).__init__(*args, **kwargs)
         self.fields['height'].label = "Height (inches)"
+        self.fields['yummlydiet'].label = "Dietary Restriction"
 
     class Meta:
         model = AppUser
-
         fields = ('yummlydiet', 'allergies', 'age', 'gender', 'height', 'diabetic', 'activity_level', 'goal')
 
 
