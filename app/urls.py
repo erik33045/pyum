@@ -7,6 +7,7 @@ from app import views
 admin.autodiscover()
 
 urlpatterns = patterns('',
+                       url(r'^$', views.home, name='home'),
                        url(r'^register/$', views.register, name='register'),
                        url(r'^search_recipes/$', views.search_recipes, name='search_recipes'),
                        url(r'^login/$', views.user_login, name='login'),
