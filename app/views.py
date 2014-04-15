@@ -1,13 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
-from django.template import RequestContext
 from django.shortcuts import render
 from django_tables2 import RequestConfig
+from django.contrib.auth.models import User
 
 import app.tables
 from app.forms import UserForm, UserFormWithoutLogin, AppUserForm, RecipeSearchForm
 from app.models import AppUser
-from django.contrib.auth.models import User
 import YummlyDriver
 
 

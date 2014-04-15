@@ -19,6 +19,7 @@
 <body>
 <div id="templatemo_main" style="background-color: #771201; min-height: 330px">
     <div class="content_wrapper" style="background-color: #771201; min-width: 750px; border: none">
+        <div style="margin-top: 10px">
         <div id="div_search" class="content_wrapper" style="background-color: #FFFFFF; width: 25%; min-width: 215px; float: left; border: 1px solid black; padding: 5px 10px 10px 10px">
             <input id="hide_search" type="button" value="Hide" onclick="changeSearchFormVisibility();" />
             <form id="form_search" action="/pyum/search_recipes/" method="POST"  enctype="multipart/form-data">
@@ -29,7 +30,7 @@
                 <div id="divUserPreferences">
                     <label for="id_calories_consumed">Calories Consumed:</label>
                     {{ search_form.calories_consumed }}
-                    <label for="id_current_weight">Current Weight:</label>
+                    <label for="id_current_weight">Current Weight (pounds):</label>
                     {{ search_form.current_weight}}
                     <label for="id_num_meals">Meals Left in the Day:</label>
                     {{ search_form.num_meals }}
@@ -92,11 +93,11 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
-
         <div style="width: 68%; float: left">
             <div id="table" style="float: left; min-width: 582px; width: 100%; background-color: #FFFFFF;">
             {% render_table table %}
             </div>
+        </div>
         </div>
     </div>
 </div>
