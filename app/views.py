@@ -91,7 +91,7 @@ def search_recipes(request):
         return render(request, 'app/login.html', {})
 
 
-# noinspection PyUnresolvedReferences
+# noinspection PyUnresolvedReferenc
 def home(request):
     if request.user.is_authenticated():
         if request.method == "POST":
