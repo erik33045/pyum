@@ -10,7 +10,6 @@ body {
     font-size: 12px;
     line-height: 18px;
     background-color:#771201;
-    background-image: url(images/templatemo_body.jpg);
     background-repeat: repeat-x;
     background-position: top;
 }
@@ -313,7 +312,6 @@ h1.templatemo_header{
     width: 400px;
     height: 40px;
     background: blue;
-    background: url(images/templatemo_menu.jpg);
     margin-left: auto;
     margin-right: auto;
 
