@@ -8,7 +8,7 @@
 
     <title>Pyum Home</title>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href='{% static "app/templatemo_style.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "app/css/templatemo_style.css" %}'>
     <style type="text/css">
 
         .button{
@@ -50,11 +50,11 @@
         <div id ="input_form" style="width: 600px; padding: 35px">
             <div style="width: 400px; margin: 0 auto">
                 <button id="button_find_meal" class = "button" type="button" value="Find Me A Meal" onclick="window.location='/app/search_recipes';">
-                    <img src ='{% static "app/images/pyum_imgs/tray_white.png" %}' style = "width: 115px"/>
+                    <img src ='{% static "app/img/tray_white.png" %}' style = "width: 115px"/>
                     Find Me a Meal
                 </button>
                 <button id="button_profile" class = "button" type="button" value="My Profile" onclick="window.location='/app/profile';">
-                    <img src ='{% static "app/images/pyum_imgs/Measure_white.png" %}' style = "width: 115px"/>
+                    <img src ='{% static "app/img/Measure_white.png" %}' style = "width: 115px"/>
                     My Profile
                 </button>
             </div>
