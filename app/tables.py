@@ -7,7 +7,7 @@ from django.utils.html import escape
 class TableRow:
     id = ""
     name = ""
-    image = ""
+    image = []
     courses = ""
     cuisines = ""
     holidays = ""
@@ -27,7 +27,7 @@ class TableRow:
         self.prep_time = search_result['totalTimeInSeconds']
 
         if len(search_result['smallImageUrls']) > 0:
-            self.image = search_result['smallImageUrls'][0]
+            self.image = ["http://www.yummly.com/recipe/" + self.id, search_result['smallImageUrls'][0]]
 
         if self.attributes.has_key("course"):
             self.courses = ', '.join(str(x) for x in self.attributes["course"])
@@ -69,8 +69,8 @@ class ResultTable(tables.Table):
 
     #Rendering the image column
     def render_image(self, value):
-        if value != "":
-            return mark_safe('<img src="%s"/>' % escape(value))
+        if len(value) > 0:
+            return mark_safe(u'<a href="{0}"><img src="{1}"/></a>'.format(escape(value[0]), escape(value[1])))
 
     #Render the link, It's the recipes name with yummly's direct link as the href
     def render_link(self, value):
