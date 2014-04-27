@@ -14,4 +14,5 @@ urlpatterns = patterns('',
                        url(r'^logout/$', views.user_logout, name='logout'),
                        url(r'^home/$', views.home, name='home'),
                        url(r'^profile/$', views.profile, name='profile'),
+                       url(r'^about/$', views.about, name='about'),
                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve'), )
