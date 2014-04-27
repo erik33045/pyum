@@ -24,6 +24,8 @@ class YummlyApiInfo:
     #Key = '654c0671661c94a799e761615c36cdd5'
 
 
+#Object that contains all user information
+#As well as any search options
 class RecipeQueryParameters:
     def __init__(self):
         pass
@@ -93,6 +95,7 @@ class RecipeQueryParameters:
     minTransFat = 0
     maxTransFat = 0
 
+    #Creates a dictionary of all search options, so they can be passed to Yummly API
     def to_dictionary(self):
         return_dictionary = {}
         if self.q != "":
@@ -195,8 +198,11 @@ class RecipeQueryParameters:
         return return_dictionary
 
 
+#Uses Yummly API to search for recipes
 def search_recipes(recipe_query_parameters):
     # passed in partial recipe parameters object
+
+    #if "ignore user preferences" option  is not selected, calculate nutritional requirements
     if not recipe_query_parameters.ignore_user_preferences:
         # call calculator to figure out desired meals
         calc = CalorieCalc(recipe_query_parameters)
@@ -220,6 +226,7 @@ def search_recipes(recipe_query_parameters):
     return client.search(**return_dictionary)
 
 
+#Get's search parameters from Django
 def django_query_to_parameter_object(post_data_dictionary, user):
     parameter_object = RecipeQueryParameters()
 
