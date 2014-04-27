@@ -69,18 +69,3 @@ class CalorieCalc:
         calories = int(calories)
         return calories
 
-# testing functions
-'''
-from YummlyDriver import RecipeQueryParameters
-p = RecipeQueryParameters()
-p.height = 71
-p.weight = 180
-p.age = 22
-p.gender = "Male"
-p.goal = "Lose 1"
-p.activityLevel = "lightly active"
-calc = CalorieCalc(p)
-cals = calc.get_calories()
-print("Calories per day: " + str(cals))
-'''
-
