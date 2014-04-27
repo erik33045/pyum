@@ -8,8 +8,8 @@ class YummlyApiInfo:
         pass
 
     #Vi's Key
-    #Id = '17f360b5'
-    #Key = '214819cbde16a118c615fc0061e6dc8b'
+    Id = '17f360b5'
+    Key = '214819cbde16a118c615fc0061e6dc8b'
 
     # Erik's Key
     #Id = '1db8b5cc'
@@ -20,8 +20,8 @@ class YummlyApiInfo:
     #Key = '392df3bc63518ea410eef68eb6da066e'
 
     #Greg's Key
-    Id = 'c406a4d1'
-    Key = '654c0671661c94a799e761615c36cdd5'
+    #Id = 'c406a4d1'
+    #Key = '654c0671661c94a799e761615c36cdd5'
 
 
 class RecipeQueryParameters:
@@ -224,10 +224,10 @@ def django_query_to_parameter_object(post_data_dictionary, user):
     parameter_object = RecipeQueryParameters()
 
     if len(post_data_dictionary['in_ingredients']):
-        parameter_object.allowed_ingredients = post_data_dictionary['in_ingredients'].split(',')
+        parameter_object.allowed_ingredients = [x.strip() for x in post_data_dictionary['in_ingredients'].split(',')]
 
     if len(post_data_dictionary['ex_ingredients']):
-        parameter_object.excluded_ingredients = post_data_dictionary['ex_ingredients'].split(',')
+        parameter_object.excluded_ingredients = [x.strip() for x in post_data_dictionary['ex_ingredients'].split(',')]
 
     if len(post_data_dictionary['prep_time']):
         parameter_object.max_total_time_in_seconds = int(post_data_dictionary['prep_time'])
