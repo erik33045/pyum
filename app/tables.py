@@ -3,6 +3,7 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escape
 
 
+#This is the class that will define what each row in the table will look like
 class TableRow:
     id = ""
     name = ""
@@ -15,6 +16,7 @@ class TableRow:
     attributes = []
     prep_time = float(0)
 
+    #Set the appropriate fields, this is the mapping from a yummly search result to our row
     def __init__(self, search_result):
         self.id = search_result['id']
         self.name = search_result['recipeName']
@@ -37,6 +39,7 @@ class TableRow:
             self.holidays = ', '.join(str(x) for x in self.attributes["holiday"])
 
 
+#Map the results into a list of table rows
 def map_from_result_list(results):
     return_list = []
     [return_list.append(TableRow(result)) for result in results]
@@ -44,6 +47,7 @@ def map_from_result_list(results):
 
 
 # noinspection PyMethodMayBeStatic
+#This is the class for the actual table
 class ResultTable(tables.Table):
     # Here is when you define the column types by the attributes
     image = tables.TemplateColumn('{{ record.image }}')
@@ -58,22 +62,27 @@ class ResultTable(tables.Table):
     class Meta:
         attrs = {"class": "paleblue", 'min-width': '582px'}
 
-    # Don't screw with this, I don't know exactly what it does
+    #I believe that this takes each method that is below and runs them to render the table correctly.
+    #Don't touch what you don't understand!
     def __init__(self, *args, **kwargs):
         super(ResultTable, self).__init__(*args, **kwargs)
 
+    #Rendering the image column
     def render_image(self, value):
         if value != "":
             return mark_safe('<img src="%s"/>' % escape(value))
 
+    #Render the link, It's the recipes name with yummly's direct link as the href
     def render_link(self, value):
         link = u'<a href="{0}">{1}</a>'.format(escape(value[0]), escape(value[1]))
 
         x = link.encode("utf-8")
         return mark_safe(x)
 
+    #Render Rating
     def render_rating(self, value):
         return value
 
+    #Render Prep Time
     def render_prep_time(self, value):
         return "%.0f" % (value / 60)

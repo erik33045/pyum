@@ -1,7 +1,9 @@
+#Models are what is mapped to our tables
 from django.db import models
 from django.contrib.auth.models import User
 
 
+#This is essentially an enum which describes any dietary restrictions a user might have
 class YummlyDiet(models.Model):
     shortDescription = models.CharField(max_length=50, default="DEFAULT")
     searchValue = models.CharField(max_length=250, default="DEFAULT")
@@ -10,6 +12,7 @@ class YummlyDiet(models.Model):
         return self.shortDescription
 
 
+#This is an enum that describes what possible allergies a user might have.
 class YummlyAllergy(models.Model):
     shortDescription = models.CharField(max_length=50, default="DEFAULT")
     searchValue = models.CharField(max_length=250, default="DEFAULT")
@@ -17,12 +20,16 @@ class YummlyAllergy(models.Model):
     def __unicode__(self):
         return self.shortDescription
 
+
+#Enum describing the user's gender
 class Gender(models.Model):
     gender = models.CharField(max_length=250)
 
     def __unicode__(self):
         return self.gender
 
+
+#Enum describing the user's activity level
 class ActivityLevel(models.Model):
     level = models.CharField(max_length=250)
 
@@ -30,6 +37,7 @@ class ActivityLevel(models.Model):
         return self.level
 
 
+#Enum describing the user's weekly goal
 class Goal(models.Model):
     goal = models.CharField(max_length=250)
 
@@ -37,6 +45,8 @@ class Goal(models.Model):
         return self.goal
 
 
+#This app user is the extension of our user model with all of pyum specific data.
+#Doing it this way allows us to use Django's built in user management functions
 class AppUser(models.Model):
     user = models.OneToOneField(User)
     yummlydiet = models.ForeignKey(YummlyDiet, default=1)
@@ -50,4 +60,3 @@ class AppUser(models.Model):
 
     def __unicode__(self):
         return self.user.username
-

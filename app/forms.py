@@ -1,9 +1,11 @@
+#The forms are what we will be displaying to the user in the HTML
 from django import forms
 from django.contrib.auth.models import User
 
 from app.models import AppUser
 
 
+#User form, maps to user model
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
@@ -12,6 +14,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 
+#User form number two, this is without a login field. Used on the profile page
 class UserFormWithoutLogin(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
@@ -20,6 +23,7 @@ class UserFormWithoutLogin(forms.ModelForm):
         fields = ('email', 'password')
 
 
+#App user form. Maps from App user model. Contains all of pyum specific data.
 class AppUserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AppUserForm, self).__init__(*args, **kwargs)
@@ -31,6 +35,7 @@ class AppUserForm(forms.ModelForm):
         fields = ('yummlydiet', 'allergies', 'age', 'gender', 'height', 'diabetic', 'activity_level', 'goal')
 
 
+#This is the form for recipe search. Does not directly tie to any model.
 class RecipeSearchForm(forms.Form):
     ignore_user_preferences = forms.BooleanField()
     current_weight = forms.IntegerField()
