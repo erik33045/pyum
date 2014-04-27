@@ -29,6 +29,7 @@ class AppUserForm(forms.ModelForm):
         super(AppUserForm, self).__init__(*args, **kwargs)
         self.fields['height'].label = "Height (inches)"
         self.fields['yummlydiet'].label = "Dietary Restriction"
+        self.fields['goal'].label = "Goal (lbs per week)"
 
     class Meta:
         model = AppUser
