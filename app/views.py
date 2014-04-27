@@ -156,3 +156,7 @@ def profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+
+def about(request):
+    return render(request, 'app/about.html', {})
