@@ -24,6 +24,8 @@ class YummlyApiInfo:
     #Key = '654c0671661c94a799e761615c36cdd5'
 
 
+#Object that contains all user information
+#As well as any search options
 class RecipeQueryParameters:
     def __init__(self):
         pass
@@ -93,6 +95,7 @@ class RecipeQueryParameters:
     minTransFat = 0
     maxTransFat = 0
 
+    #Creates a dictionary of all search options, so they can be passed to Yummly API
     def to_dictionary(self):
         return_dictionary = {}
         if self.q != "":
@@ -195,8 +198,11 @@ class RecipeQueryParameters:
         return return_dictionary
 
 
+#Uses Yummly API to search for recipes
 def search_recipes(recipe_query_parameters):
     # passed in partial recipe parameters object
+
+    #if "ignore user preferences" option  is not selected, calculate nutritional requirements
     if not recipe_query_parameters.ignore_user_preferences:
         # call calculator to figure out desired meals
         calc = CalorieCalc(recipe_query_parameters)
@@ -220,28 +226,30 @@ def search_recipes(recipe_query_parameters):
     return client.search(**return_dictionary)
 
 
+#Get's search parameters from Django
 def django_query_to_parameter_object(post_data_dictionary, user):
     parameter_object = RecipeQueryParameters()
-
+    #putting included ingredients into a list
     if len(post_data_dictionary['in_ingredients']):
         parameter_object.allowed_ingredients = [x.strip() for x in post_data_dictionary['in_ingredients'].split(',')]
-
+    #putting excluded ingredients into a list
     if len(post_data_dictionary['ex_ingredients']):
         parameter_object.excluded_ingredients = [x.strip() for x in post_data_dictionary['ex_ingredients'].split(',')]
-
+    #converting the prep-time from a string into an integer
     if len(post_data_dictionary['prep_time']):
         parameter_object.max_total_time_in_seconds = int(post_data_dictionary['prep_time'])
-
+    #saving mix and max sweetness, shifting decimal point for conversion purposes
     if len(post_data_dictionary['amount-sweetness']):
         sweetness = post_data_dictionary['amount-sweetness'].split('-')
         parameter_object.sweet_min_flavor = float(sweetness[0]) / 10.00
         parameter_object.sweet_max_flavor = float(sweetness[1]) / 10.00
-
+    #saving min and max meatiness, shifting the decimal point for conversion purposes
     if len(post_data_dictionary['amount-meatiness']):
         meatiness = post_data_dictionary['amount-meatiness'].split('-')
         parameter_object.meaty_min_flavor = float(meatiness[0]) / 10.00
         parameter_object.meaty_max_flavor = float(meatiness[1]) / 10.00
-
+    #checks to see if we are ignoring user preferences, if so skip to the return
+    #else assign additional information from user preferences
     if post_data_dictionary.has_key('ignore_user_preferences'):
         parameter_object.ignore_user_preferences = True
     else:
