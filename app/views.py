@@ -18,6 +18,7 @@ def register(request):
 
     if request.method == 'POST':
         #Get the relevant data from the post
+        request.POST["username"] = request.POST["username"].lower()
         user_form = UserForm(data=request.POST)
         profile_form = AppUserForm(data=request.POST)
 
@@ -50,7 +51,7 @@ def register(request):
 def user_login(request):
     #If posting, we're logging someone in
     if request.method == 'POST':
-        username = request.POST['username']
+        username = request.POST['username'].lower()
         password = request.POST['password']
 
         #Try to authenticate
