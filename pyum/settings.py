@@ -69,7 +69,6 @@ DATABASES = {
 }
 
 #We speak english here, localization is for chumps
->>>>>>> a327dd6ab729b6084eec65aa1bbc834bd345c94b
 LANGUAGE_CODE = 'en-us'
 
 #East coast
