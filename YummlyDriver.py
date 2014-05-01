@@ -58,42 +58,42 @@ class RecipeQueryParameters:
     sweet_max_flavor = 0.0
     meaty_min_flavor = 0.0
     meaty_max_flavor = 0.0
-    sourMinFlavor = 0.0
-    sourMaxFlavor = 0.0
-    bitterMinFlavor = 0.0
-    bitterMaxFlavor = 0.0
-    piquantMinFlavor = 0.0
-    piquantMaxFlavor = 0.0
+    sour_min_flavor = 0.0
+    sour_max_flavor = 0.0
+    bitter_min_flavor = 0.0
+    bitter_max_flavor = 0.0
+    piquant_min_flavor = 0.0
+    piquant_max_flavor = 0.0
 
     # Nutrition stuff
-    minFat = 0
-    maxFat = 0
-    minSodium = 0
-    maxSodium = 0
-    minCholesterol = 0
-    maxCholesterol = 0
-    minFatSat = 0
-    maxFatSat = 0
-    minCarbs = 0
-    maxCarbs = 0
-    minFiber = 0
-    maxFiber = 0
-    minProtein = 0
-    maxProtein = 0
-    minVitaminC = 0
-    maxVitaminC = 0
-    minCalcium = 0
-    maxCalcium = 0
-    minIron = 0
-    maxIron = 0
-    minSugar = 0
-    maxSugar = 0
-    minCalories = 0
-    maxCalories = 0
-    minVitaminA = 0
-    maxVitaminA = 0
-    minTransFat = 0
-    maxTransFat = 0
+    min_fat = 0
+    max_fat = 0
+    min_sodium = 0
+    max_sodium = 0
+    min_cholesterol = 0
+    max_cholesterol = 0
+    min_fat_sat = 0
+    max_fat_sat = 0
+    min_carbs = 0
+    max_carbs = 0
+    min_fiber = 0
+    max_fiber = 0
+    min_protein = 0
+    max_protein = 0
+    min_vitamin_c = 0
+    max_vitamin_c = 0
+    min_calcium = 0
+    max_calcium = 0
+    min_iron = 0
+    max_iron = 0
+    min_sugar = 0
+    max_sugar = 0
+    min_calories = 0
+    max_calories = 0
+    min_vitamin_a = 0
+    max_vitamin_a = 0
+    min_trans_fat = 0
+    max_trans_fat = 0
 
     #Creates a dictionary of all search options, so they can be passed to Yummly API
     def to_dictionary(self):
@@ -126,74 +126,74 @@ class RecipeQueryParameters:
             return_dictionary['flavor.meaty.min'] = self.meaty_min_flavor
         if self.meaty_max_flavor > 0.0:
             return_dictionary['flavor.meaty.max'] = self.meaty_max_flavor
-        if self.sourMinFlavor > 0.0:
-            return_dictionary['flavor.sour.min'] = self.sourMinFlavor
-        if self.sourMaxFlavor > 0.0:
-            return_dictionary['flavor.sour.max'] = self.sourMaxFlavor
-        if self.bitterMinFlavor > 0.0:
-            return_dictionary['flavor.bitter.min'] = self.bitterMinFlavor
-        if self.bitterMaxFlavor > 0.0:
-            return_dictionary['flavor.bitter.max'] = self.bitterMaxFlavor
-        if self.piquantMinFlavor > 0.0:
-            return_dictionary['flavor.piquant.min'] = self.piquantMinFlavor
-        if self.piquantMaxFlavor > 0.0:
-            return_dictionary['flavor.piquant.max'] = self.piquantMaxFlavor
-        if self.minFat > 0.0:
-            return_dictionary['nutrition.FAT.min'] = self.minFat
-        if self.maxFat > 0.0:
-            return_dictionary['nutrition.FAT.max'] = self.maxFat
-        if self.minSodium > 0.0:
-            return_dictionary['nutrition.NA.min'] = self.minSodium
-        if self.maxSodium > 0.0:
-            return_dictionary['nutrition.NA.max'] = self.maxSodium
-        if self.minCholesterol > 0.0:
-            return_dictionary['nutrition.CHOLE.min'] = self.minCholesterol
-        if self.maxCholesterol > 0.0:
-            return_dictionary['nutrition.CHOLE.max'] = self.maxCholesterol
-        if self.minFatSat > 0.0:
-            return_dictionary['nutrition.FATSAT.min'] = self.minFatSat
-        if self.maxFatSat > 0.0:
-            return_dictionary['nutrition.FATSAT.max'] = self.maxFatSat
-        if self.minCarbs > 0.0:
-            return_dictionary['nutrition.CHOCDF.min'] = self.minCarbs
-        if self.minCarbs > 0.0:
-            return_dictionary['nutrition.CHOCDF.max'] = self.maxCarbs
-        if self.minFiber > 0.0:
-            return_dictionary['nutrition.FIBTG.min'] = self.minFiber
-        if self.maxFiber > 0.0:
-            return_dictionary['nutrition.FIBTG.max'] = self.maxFiber
-        if self.minProtein > 0.0:
-            return_dictionary['nutrition.PROCNT.min'] = self.minProtein
-        if self.maxProtein > 0.0:
-            return_dictionary['nutrition.PROCNT.max'] = self.maxProtein
-        if self.minVitaminC > 0.0:
-            return_dictionary['nutrition.VITC.min'] = self.minVitaminC
-        if self.maxVitaminC > 0.0:
-            return_dictionary['nutrition.VITC.max'] = self.maxVitaminC
-        if self.minCalcium > 0.0:
-            return_dictionary['nutrition.CA.min'] = self.minCalcium
-        if self.maxCalcium > 0.0:
-            return_dictionary['nutrition.CA.max'] = self.maxCalcium
-        if self.minIron > 0.0:
-            return_dictionary['nutrition.FE.min'] = self.minIron
-        if self.maxIron > 0.0:
-            return_dictionary['nutrition.FE.max'] = self.maxIron
-        if self.minSugar > 0.0:
-            return_dictionary['nutrition.SUGAR.min'] = self.minSugar
-        if self.maxSugar > 0.0:
-            return_dictionary['nutrition.SUGAR.max'] = self.maxSugar
-        if self.minCalories > 0.0:
-            return_dictionary['nutrition.ENERC_KCAL.min'] = self.minCalories
-        if self.maxCalories > 0.0:
-            return_dictionary['nutrition.ENERC_KCAL.max'] = self.maxCalories
-        if self.minVitaminA > 0.0:
-            return_dictionary['nutrition.VITA_IU.min'] = self.minVitaminA
-        if self.maxVitaminA > 0.0:
-            return_dictionary['nutrition.VITA_IU.max'] = self.maxVitaminA
-        if self.minTransFat > 0.0:
-            return_dictionary['nutrition.FATRN.min'] = self.minTransFat
-        if self.maxTransFat > 0.0:
-            return_dictionary['nutrition.FATRN.max'] = self.maxTransFat
+        if self.sour_min_flavor > 0.0:
+            return_dictionary['flavor.sour.min'] = self.sour_min_flavor
+        if self.sour_max_flavor > 0.0:
+            return_dictionary['flavor.sour.max'] = self.sour_max_flavor
+        if self.bitter_min_flavor > 0.0:
+            return_dictionary['flavor.bitter.min'] = self.bitter_min_flavor
+        if self.bitter_max_flavor > 0.0:
+            return_dictionary['flavor.bitter.max'] = self.bitter_max_flavor
+        if self.piquant_min_flavor > 0.0:
+            return_dictionary['flavor.piquant.min'] = self.piquant_min_flavor
+        if self.piquant_max_flavor > 0.0:
+            return_dictionary['flavor.piquant.max'] = self.piquant_max_flavor
+        if self.min_fat > 0.0:
+            return_dictionary['nutrition.FAT.min'] = self.min_fat
+        if self.max_fat > 0.0:
+            return_dictionary['nutrition.FAT.max'] = self.max_fat
+        if self.min_sodium > 0.0:
+            return_dictionary['nutrition.NA.min'] = self.min_sodium
+        if self.max_sodium > 0.0:
+            return_dictionary['nutrition.NA.max'] = self.max_sodium
+        if self.min_cholesterol > 0.0:
+            return_dictionary['nutrition.CHOLE.min'] = self.min_cholesterol
+        if self.max_cholesterol > 0.0:
+            return_dictionary['nutrition.CHOLE.max'] = self.max_cholesterol
+        if self.min_fat_sat > 0.0:
+            return_dictionary['nutrition.FATSAT.min'] = self.min_fat_sat
+        if self.max_fat_sat > 0.0:
+            return_dictionary['nutrition.FATSAT.max'] = self.max_fat_sat
+        if self.min_carbs > 0.0:
+            return_dictionary['nutrition.CHOCDF.min'] = self.min_carbs
+        if self.min_carbs > 0.0:
+            return_dictionary['nutrition.CHOCDF.max'] = self.max_carbs
+        if self.min_fiber > 0.0:
+            return_dictionary['nutrition.FIBTG.min'] = self.min_fiber
+        if self.max_fiber > 0.0:
+            return_dictionary['nutrition.FIBTG.max'] = self.max_fiber
+        if self.min_protein > 0.0:
+            return_dictionary['nutrition.PROCNT.min'] = self.min_protein
+        if self.max_protein > 0.0:
+            return_dictionary['nutrition.PROCNT.max'] = self.max_protein
+        if self.min_vitamin_c > 0.0:
+            return_dictionary['nutrition.VITC.min'] = self.min_vitamin_c
+        if self.max_vitamin_c > 0.0:
+            return_dictionary['nutrition.VITC.max'] = self.max_vitamin_c
+        if self.min_calcium > 0.0:
+            return_dictionary['nutrition.CA.min'] = self.min_calcium
+        if self.max_calcium > 0.0:
+            return_dictionary['nutrition.CA.max'] = self.max_calcium
+        if self.min_iron > 0.0:
+            return_dictionary['nutrition.FE.min'] = self.min_iron
+        if self.max_iron > 0.0:
+            return_dictionary['nutrition.FE.max'] = self.max_iron
+        if self.min_sugar > 0.0:
+            return_dictionary['nutrition.SUGAR.min'] = self.min_sugar
+        if self.max_sugar > 0.0:
+            return_dictionary['nutrition.SUGAR.max'] = self.max_sugar
+        if self.min_calories > 0.0:
+            return_dictionary['nutrition.ENERC_KCAL.min'] = self.min_calories
+        if self.max_calories > 0.0:
+            return_dictionary['nutrition.ENERC_KCAL.max'] = self.max_calories
+        if self.min_vitamin_a > 0.0:
+            return_dictionary['nutrition.VITA_IU.min'] = self.min_vitamin_a
+        if self.max_vitamin_a > 0.0:
+            return_dictionary['nutrition.VITA_IU.max'] = self.max_vitamin_a
+        if self.min_trans_fat > 0.0:
+            return_dictionary['nutrition.FATRN.min'] = self.min_trans_fat
+        if self.max_trans_fat > 0.0:
+            return_dictionary['nutrition.FATRN.max'] = self.max_trans_fat
 
         return return_dictionary
 
@@ -248,6 +248,22 @@ def django_query_to_parameter_object(post_data_dictionary, user):
         meatiness = post_data_dictionary['amount-meatiness'].split('-')
         parameter_object.meaty_min_flavor = float(meatiness[0]) / 10.00
         parameter_object.meaty_max_flavor = float(meatiness[1]) / 10.00
+    #saving min and max sourness, shifting the decimal point for conversion purposes
+    if len(post_data_dictionary['amount-sourness']):
+        sourness = post_data_dictionary['amount-sourness'].split('-')
+        parameter_object.sour_min_flavor = float(sourness[0]) / 10.00
+        parameter_object.sour_max_flavor = float(sourness[1]) / 10.00
+    #saving min and max bitterness, shifting the decimal point for conversion purposes
+    if len(post_data_dictionary['amount-bitterness']):
+        bitterness = post_data_dictionary['amount-bitterness'].split('-')
+        parameter_object.bitter_min_flavor = float(bitterness[0]) / 10.00
+        parameter_object.bitter_max_flavor = float(bitterness[1]) / 10.00
+    #saving min and max spicyness, shifting the decimal point for conversion purposes
+    if len(post_data_dictionary['amount-spicyness']):
+        spicyness = post_data_dictionary['amount-spicyness'].split('-')
+        parameter_object.piquant_min_flavor = float(spicyness[0]) / 10.00
+        parameter_object.piquant_max_flavor = float(spicyness[1]) / 10.00
+
     #checks to see if we are ignoring user preferences, if so skip to the return
     #else assign additional information from user preferences
     if post_data_dictionary.has_key('ignore_user_preferences'):
@@ -257,7 +273,7 @@ def django_query_to_parameter_object(post_data_dictionary, user):
             parameter_object.weight = int(post_data_dictionary['current_weight'])
 
         if len(post_data_dictionary['calories_consumed']):
-            parameter_object.weight = int(post_data_dictionary['calories_consumed'])
+            parameter_object.calories_consumed = int(post_data_dictionary['calories_consumed'])
 
         parameter_object.meals_left = int(post_data_dictionary['num_meals'])
 
