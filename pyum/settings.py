@@ -49,6 +49,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request'
 )
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 #Where are the URL's found? Right here.
 ROOT_URLCONF = 'pyum.urls'
 
